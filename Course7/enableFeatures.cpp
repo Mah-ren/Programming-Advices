@@ -1,6 +1,3 @@
-//! Certainly! To store and combine the features in a single integer, you can use bitwise operations.
-//! Here's an improved version of your code with better logic, variable names, and comments:
-
 #include <iostream>
 #include <limits>
 using namespace std;
@@ -29,16 +26,28 @@ enum FeatureStatus
     DISABLED = 'n',
     ENABLED = 'y'
 };
-
+bool IsFeatureEnabled(const stUN& UN, short feature);
 bool AreYouAgreed(string message, char agreed, char notAgreed);
 short GivePermissions(string message, short featureNumber);
-int GetValidPositiveIntegerInRange(string message, short min, short max);
+short GetValidPositiveshortegerInRange(string message, short min, short max);
 stUN PerformPermission(stUN &);
+
 int main()
 {
     stUN UN;
     UN = PerformPermission(UN);
     cout << "\nNOW the permission is: " << UN.permissions ;
+    
+    
+    short featureNumber = 1;
+    while(true)
+    {
+        featureNumber = GetValidPositiveshortegerInRange("\nPlease enter featurenumber: ", 1, 7);
+        if(IsFeatureEnabled(UN, 1 << (featureNumber - 1)))
+            cout << "\nthis feature is enabled";
+        else
+            cout << "\nthis feature is disabled";
+    }
 
 
 }
@@ -61,13 +70,10 @@ stUN PerformPermission(stUN &UN)
     return UN;
 }
 
-
-//! عايز اعمل فنكشن بتاخد من المستخدم رسالة و رقم الفيتشر يعني مثلا الخامسة 
-//! لو المستخدم عمل ادخل 
 short GivePermissions(string message, short featureNumber)
 {
     short permission = 0;
-  //  permission &= ~(1 << (featureNumber - 'a'));
+    permission &= ~(1 << (featureNumber - 'a'));
     bool areYouAgreed = AreYouAgreed(message, 'y', 'n');
     
     if((featureNumber == 0) && areYouAgreed)
@@ -90,7 +96,7 @@ bool AreYouAgreed(string message, char agreed, char notAgreed)
         cout << message;
         cin >> choice;
 
-        if (cin.fail()) // Check if extraction failed (non-integer input)
+        if (cin.fail()) // Check if extraction failed (non-shorteger input)
         {
             cin.clear();                                         // Clear the error flag
             cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Ignore invalid input
@@ -103,24 +109,33 @@ bool AreYouAgreed(string message, char agreed, char notAgreed)
     return (tolower(choice) == 'y') ? true : false;
 }
 
-int GetValidPositiveIntegerInRange(string message, short min, short max)
+short GetValidPositiveshortegerInRange(string message, short min, short max)
 {
-    int number = 1;
+    short number = 1;
 
     do
     {
         cout << message;
         cin >> number;
 
-        if (cin.fail()) // Check if extraction failed (non-integer input)
+        if (cin.fail()) // Check if extraction failed (non-shorteger input)
         {
             cin.clear();                                         // Clear the error flag
             cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Ignore invalid input
-            cout << "\nInvalid input. Please enter a positive integer." << endl;
+            cout << "\nInvalid input. Please enter a positive shorteger." << endl;
             continue; // Prompt user again
         }
 
     } while (number < min || number > max);
 
     return number;
+}
+//! enable 1&3&6
+//! 1 | 11 | 110 -> 111 so 7
+//! 64      32 16 8    4 2 1 
+//!          1         1   1   
+bool IsFeatureEnabled(const stUN& UN, short feature)
+{
+    // Check if the feature is enabled using bitwise AND
+    return (UN.permissions & feature) != 0;
 }
