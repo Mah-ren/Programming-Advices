@@ -44,7 +44,7 @@ void AddNewClient(vector<CD> &vClients, string fileName, string delimiter = "#//
 void AddDataLineToFile(string fileName, string dataLine);
 
 CD ChangeClientRecord(string AccountNumber);
-string ConvertRecordToLine(CD cd, string delimiter = "#//#");
+string ConvertRecordToLineForClient(CD cd, string delimiter = "#//#");
 CD ConvertLineToRecord(string line);
 void ClientsIsNotFoundStatement(string accountNumber);
 
@@ -131,7 +131,7 @@ void AddClients(vector<CD> &vClients, string fileName, string delimiter)
 void AddNewClient(vector<CD> &vClients, string fileName, string delimiter)
 {
     AddDataLineToFile(
-        fileName, ConvertRecordToLine(
+        fileName, ConvertRecordToLineForClient(
                       ReadNewClientData(vClients), delimiter));
 }
 void AddDataLineToFile(string fileName, string dataLine)
@@ -167,7 +167,7 @@ void ClientsIsNotFoundStatement(string accountNumber)
     cout << "\a";
     system("color 0c");
 }
-string ConvertRecordToLine(CD cd, string delimiter)
+string ConvertRecordToLineForClient(CD cd, string delimiter)
 {
     return (cd.accountNumber + delimiter + (cd.pinCode) + delimiter + cd.name + delimiter + cd.phone + delimiter + to_string(cd.balance));
 }
@@ -661,7 +661,7 @@ void SaveCleintsDataToFile(string fileName, vector<CD> &vClients)
         string lineOfRecord;
         for(CD &cd: vClients)
         {
-            lineOfRecord = ConvertRecordToLine(cd);
+            lineOfRecord = ConvertRecordToLineForClient(cd);
             myFile << lineOfRecord << endl;
         }
     }
@@ -677,7 +677,7 @@ void SaveCleintsDataToFileForDelete(string fileName, vector<CD> &vClients)
         {
             if (!cd.markForDeleting)
             {
-                string lineOfRecord = ConvertRecordToLine(cd);
+                string lineOfRecord = ConvertRecordToLineForClient(cd);
                 myFile << lineOfRecord << endl;
             }
         }
@@ -696,7 +696,7 @@ void SaveCleintsUpdateToFile(string fileName, vector<CD> &vClients, string accou
                 // Update the specific client data marked for updating
                 cd = ChangeClientRecord(accountNumber);
             }
-            myFile << ConvertRecordToLine(cd) << endl;
+            myFile << ConvertRecordToLineForClient(cd) << endl;
         }
         myFile.close();
     }
