@@ -14,6 +14,16 @@ using namespace std;
 #define f 0b00100000
 #define g 0b01000000
 
+
+typedef struct stUserName
+{
+    string user_name;
+    string password;
+    short permissions = 1;
+    bool markForDeleting = false;
+    bool markForUpdating = false;
+    double balance = 0;
+} stUN;
 enum FeatureStatus
 {
     DISABLED = 'n',
@@ -23,31 +33,32 @@ enum FeatureStatus
 bool AreYouAgreed(string message, char agreed, char notAgreed);
 short GivePermissions(string message, short featureNumber);
 int GetValidPositiveIntegerInRange(string message, short min, short max);
-short PerformPermission();
+stUN PerformPermission(stUN &);
 int main()
 {
-    short permission = PerformPermission();
-    cout << "\nNOW the permission is: " << permission;
+    stUN UN;
+    UN = PerformPermission(UN);
+    cout << "\nNOW the permission is: " << UN.permissions ;
 
 
 }
-
-short PerformPermission()
+stUN PerformPermission(stUN &UN)
 {
-    short permission = GivePermissions("Do you want to give full access? [y/n] ", 0);
-    
-    if(permission == -1)
-        return permission;
-        
+    UN.permissions |= GivePermissions("\nDo you want to give full access? [y/n] ", 0);
 
-    short length = GetValidPositiveIntegerInRange("\nPlease enter the number of the features: ", 1, 10);
+    if (UN.permissions == -1)
+        return UN;
 
-    for(short i = 1; i <= length; ++i)
-    {
-        permission = GivePermissions("Do you want to give access to Feature[" + to_string(i) + "] ? [y/n] ",i);
-    }
-    
-    return permission;
+    cout << "\nDo you want to give full access to:\n";
+    UN.permissions |= GivePermissions("\nShow Client List? [y/n] ", 1);
+    UN.permissions |= GivePermissions("\nAdd New Client? [y/n] ", 2);
+    UN.permissions |= GivePermissions("\nDelete Client? [y/n] ", 3);
+    UN.permissions |= GivePermissions("\nUpdate Client? [y/n] ", 4);
+    UN.permissions |= GivePermissions("\nFind Client? [y/n] ", 5);
+    UN.permissions |= GivePermissions("\nTransactions? [y/n] ", 6);
+    UN.permissions |= GivePermissions("\nManage Users? [y/n] ", 7);
+
+    return UN;
 }
 
 
@@ -55,8 +66,8 @@ short PerformPermission()
 //! لو المستخدم عمل ادخل 
 short GivePermissions(string message, short featureNumber)
 {
-    int permission = 0;
-    permission &= ~(1 << (featureNumber - 'a'));
+    short permission = 0;
+  //  permission &= ~(1 << (featureNumber - 'a'));
     bool areYouAgreed = AreYouAgreed(message, 'y', 'n');
     
     if((featureNumber == 0) && areYouAgreed)
