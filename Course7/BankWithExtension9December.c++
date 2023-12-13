@@ -35,20 +35,20 @@ enum enMainMenueForClients
 };
 enum enMainMenueForUsers
 {
-    ShowUserList = 1,
-    Add_New_User = 2,
-    DeleteUser = 3,
-    UpdateUserInfo = 4,
-    FindUser = 5,
+    ShowClientList = 1,
+    Add_New_Client = 2,
+    DeleteClient = 3,
+    UpdateClientInfo = 4,
+    FindClient = 5,
     Transactions = 6,
     ManageUsers = 7,
     Logout = 8
 };
 enum enManageUsersMenue
 {
-    UsersList = 1, 
+    UsersList = 1,
     AddNewUser = 2,
-    DeleteUser = 3, 
+    DeleteUser = 3,
     UpdateUser = 4,
     FindUser = 5,
     MainMenue = 6
@@ -91,7 +91,9 @@ typedef struct stUserName
 
 void AddClients(vector<CD> &vClients, string ClientsFile, string delimiter = "#//#");
 void AddNewClient(vector<CD> &vClients, string ClientsFile, string delimiter = "#//#");
+CD AddNewClientData(vector<CD> &vClients);
 void AddDataLineToFile(string ClientsFile, string dataLine);
+void AddUsers(vector<stUN> &vUsers, string UsersFile, string delimiter = "#//#");
 bool AreYouAgreed(string message, char agreed, char notAgreed);
 
 CD ChangeClientRecord(string AccountNumber);
@@ -102,9 +104,12 @@ stUN ConvertUserLineToRecord(string line);
 void ClientIsNotFoundStatement(string accountNumber);
 
 void DeleteClientFromFileByAccountNumber(vector<CD> &vClients);
+void DeleteUserFromFileByUsername(vector<stUN> &vUsers);
 
-bool FindClientByAccountNumberAndPinCode(vector<CD> &vClients, CD &cd, string accountNumber);
-bool FindClientByAccountNumberAndPinCode(vector<CD> &vClients, string accountNumber);
+bool FindClientByAccountNumber(vector<CD> &vClients, string accountNumber);
+bool FindClientByAccountNumberAndPinCode(vector<CD> &vClients, CD &cd);
+bool FindUserByUsername(vector<stUN> &vUsers, stUN &UN, string user_name);
+bool FindUserByUserNameAndPassword(vector<stUserName> &vUsers, stUN UN);
 
 enManageUsersMenue GetManageUsersOption();
 enMainMenueForClients GetMainOptionByUserForClients();
@@ -115,7 +120,8 @@ int GetValidPositiveIntegerInRange(string message, short min, short max);
 short GetValidPositiveShortIntegerInRange(string, short, short);
 short GivePermissions(string message, short featureNumber);
 void GoBackToMainMenueForClients(vector<CD> &vClients);
-void GoBackToMainMenueForUsers(vector<stUN> &vUsers);
+void GoBackToMainMenueForUsers(vector<stUN> &vUsers, vector<CD> &vClients);
+void GoBackToManageMenueForUsers(vector<stUN> &vUsers);
 void GoBackToTransactionsMenue(vector<CD> &vClients);
 
 bool isVectorEmpty(vector<CD> &vClients);
@@ -131,7 +137,7 @@ bool MarkClientForUpdateByAccountNumber(vector<CD> &vClients, string accountNumb
 void PrintClientsData(vector<CD> &vClients);
 void PrintOneClientDataLongitudinallyAndtransversely(CD &cd, char LongitudinallyAndtransversely);
 void PrintOneUserDataLongitudinallyAndtransversely(stUN &UN, char LongitudinallyAndtransversely);
-void PrintOneUserDataLongitudinallyAndtransversely(stUN& UN, char LongitudinallyAndtransversely);
+void PrintOneUserDataLongitudinallyAndtransversely(stUN &UN, char LongitudinallyAndtransversely);
 void PrintUsersData(vector<stUN> &vUsers);
 void PerformDeposit(vector<CD> &vClients);
 void PerformFindUser(vector<stUN> &vUsers);
@@ -144,26 +150,30 @@ void PerformTransactions(vector<stUN> &vUsers);
 void PerformTransactionsMenueOptionsForClients(vector<CD> &vClients, enTransactionsMenue option);
 void PerformUpdateClient(vector<CD> &vClients);
 void PerformWithdraw(vector<CD> &vClients);
-
-CD AddNewClientData(vector<CD> &vClients);
+void PerformWithdraw(vector<stUN> &vUsers);
 
 void SaveCleintsDataToFile(string ClientsFile, vector<CD> &vClients);
 void SaveCleintsDataToFileForDelete(string ClientsFile, vector<CD> &vClients);
 void SaveCleintsUpdateToFile(string ClientsFile, vector<CD> &vClients, string accountNumber);
+void SaveUsersDataToFile(string UsersFile, vector<stUN> &vUsers);
+void SaveUserDataToFileForDelete(string UsersFile, vector<stUN> &vUsers);
+void SaveUsersUpdateToFile(string UsersFile, vector<stUN> &vUsers, string username);
 void SearchForClientsByAccountNumber(vector<CD> &vClients);
-void SearchForUserByUsername(vector<stUN>& vUsers);
-void ShowNewBalance(CD &cd);
+void SearchForUserByUsername(vector<stUN> &vUsers);
 void ShowBalancesStatement(vector<CD> &vClients);
 void ShowBalancesList(vector<CD> &vClients);
 void ShowBalancesOfClients(vector<CD> &vClients);
 void ShowBalanceOfOneClient(vector<CD> &vClients, enTransactionsMenue option);
-void ShowClientsStatement(size_t);
+void ShowClientsListScreen(size_t);
+void ShowUsersListScreen(size_t);
 void ShowLogInScreen();
 void ShowMainMenueScreenForClients();
 void ShowMainMenueScreenForUsers();
 void ShowMainMenueOptionsScreenForClients(enMainMenueForClients option);
 void ShowManageMenueOptionsScreen(enManageUsersMenue option, vector<stUN> &vUsers);
 void ShowManageUsersMenueScreen();
+void ShowNewBalance(CD &cd);
+void ShowNewBalance(stUN &UN);
 void ShowTransactionsMenueOptionsScreen(enTransactionsMenue option);
 void ShowTransactionsMenueScreenForClients();
 void ShowVectorIsEmpty();
@@ -180,7 +190,7 @@ void UserIsNotFoundStatement(string username);
 int main()
 {
     Log_in();
-} 
+}
 
 //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -196,28 +206,12 @@ void AddClients(vector<CD> &vClients, string ClientsFile, string delimiter)
         addMore = AreYouAgreed("\n\aClient Added Successfuly, Do you want to add more clients? [Y/N] ", 'y', 'n');
     }
 }
-stUN AddNewUserData(vector<stUN>& vUsers)
-{
-    stUN UN;
-
-    do
-    {
-        UN.user_name = GetStringInput("\nEnter Username: ");
-        UN.password  = GetStringInput("\nEnter Password: ");
-
-        if (FindUserByUserName(vUsers, UN, username))
-            
-    
-    } while (AreYouAgreed())
-}
-
-}
 CD AddNewClientData(vector<CD> &vClients)
 {
     CD cd;
     string accountNumber = GetStringInput("Enter Account Number: ");
 
-    while (FindClientByAccountNumberAndPinCode(vClients, accountNumber))
+    while (FindClientByAccountNumberAndPinCode(vClients, cd))
     {
         cout << "\a";
         system("color 0c");
@@ -242,6 +236,24 @@ CD AddNewClientData(vector<CD> &vClients)
     cin.ignore(numeric_limits<streamsize>::max(), '\n'); //~ Clear buffer
     return cd;
 }
+stUN AddNewUserData(vector<stUN> &vUsers)
+{
+    stUN UN;
+    string username = GetStringInput("Enter Username: ");
+
+    while (FindUserByUsername(vUsers, UN, username))
+    {
+        cout << "\a";
+        system("color 0c");
+        cout << "User With[" << UN.user_name << "] already exists, Enter another Username: ";
+        getline(cin >> ws, username);
+    }
+
+    UN.user_name = username;
+    UN.password = GetStringInput("\nEnter Password: ");
+
+    return UN;
+}
 void AddUsers(vector<stUN> &vUsers, string UsersFile, string delimiter)
 {
     char addMore = 'y';
@@ -257,13 +269,14 @@ void AddNewClient(vector<CD> &vClients, string ClientsFile, string delimiter)
 {
     AddDataLineToFile(
         ClientsFile, ConvertRecordToLineForClient(
-                      AddNewClientData(vClients), delimiter));
+                         AddNewClientData(vClients), delimiter));
 }
 void AddNewUser(vector<stUN> &vUsers, string UsersFile, string delimiter)
 {
     AddDataLineToFile(
-        ClientsFile, ConvertRecordToLineForUser(
-                       (vUsers, UsersFile, delimiter), delimiter));
+        ClientsFile,
+        ConvertRecordToLineForUser(
+            AddNewUserData(vUsers)));
 }
 void AddDataLineToFile(string ClientsFile, string dataLine)
 {
@@ -366,9 +379,8 @@ void DeleteClientFromFileByAccountNumber(vector<CD> &vClients)
     cout << "\nDelete Client\n";
     cin.ignore(numeric_limits<streamsize>::max(), '\n');
     string accountNumber = GetStringInput("\nPlease Enter Account Number To Delete it: ");
-    char answer = 'n';
 
-    if (FindClientByAccountNumberAndPinCode(vClients, cd, accountNumber))
+    if (FindClientByAccountNumber(vClients, accountNumber))
     {
         PrintOneClientDataLongitudinallyAndtransversely(cd, 'l');
 
@@ -386,27 +398,25 @@ void DeleteClientFromFileByAccountNumber(vector<CD> &vClients)
     else
         ClientIsNotFoundStatement(accountNumber);
 }
-
-void DeleteUserFromFileByAccountNumber(vector<stUN>& vUsers)
+void DeleteUserFromFileByUsername(vector<stUN> &vUsers)
 {
     stUN UN;
     cout << "\nDelete User\n";
     cin.ignore(numeric_limits<streamsize>::max(), '\n');
     string username = GetStringInput("\nPlease Enter Username To Delete it: ");
-    char answer = 'n';
 
-    if (FindUserByUsername(vUsers, username))
+    if (FindUserByUsername(vUsers, UN, username))
     {
-        PrintOneClientDataLongitudinallyAndtransversely(cd, 'l');
+        PrintOneUserDataLongitudinallyAndtransversely(UN, 'l');
 
         if (AreYouAgreed("\nAre you sure you want to make this transaction? [Y/N]: ", 'y', 'n'))
         {
-            MarkClientForDeleteByAccountNumber(vClients, accountNumber);
-            SaveCleintsDataToFileForDelete(ClientsFile, vClients);
+            MarkUserForDeleteByUsername(vUsers, username);
+            SaveUserDataToFileForDelete(UsersFile, vUsers);
 
             //~ Refresh Clients
-            vClients = LoadClientDataFromFileToVector(ClientsFile);
-            cout << "\n\nClient Deleted Successfully.";
+            vUsers = LoadUserDataFromFileToVector(UsersFile);
+            cout << "\n\nUser Deleted Successfully.";
             system("color 0a");
         }
     }
@@ -414,7 +424,7 @@ void DeleteUserFromFileByAccountNumber(vector<stUN>& vUsers)
         UserIsNotFoundStatement(username);
 }
 
-void EnterUserNameAndPassword(vector<stUN>& vUsers, vector<CD>& vClients)
+void EnterUserNameAndPassword(vector<stUN> &vUsers, vector<CD> &vClients)
 {
     stUN UN;
     CD cd;
@@ -422,22 +432,25 @@ void EnterUserNameAndPassword(vector<stUN>& vUsers, vector<CD>& vClients)
     while (true)
     {
         UN.user_name = cd.accountNumber = GetStringInput("\nEnter Username: ");
-        UN.password = cd.pinCode        = GetStringInput("\nEnter Password: ");
+        UN.password = cd.pinCode = GetStringInput("\nEnter Password: ");
 
         if (FindUserByUserNameAndPassword(vUsers, UN))
-            PerformMainMenueOptionForUsers(vUsers);
+            PerformMainMenueOptionForUsers(vUsers, vClients);
         else if (FindClientByAccountNumberAndPinCode(vClients, cd))
             PerformMainMenueOptionForClients(vClients);
         cout << "\nInvalid Username/Password:";
     }
 }
 
-bool FindClientByAccountNumber(vector<CD> &vClients, string accountNumber)
+bool FindClientByAccountNumber(vector<CD> &vClients, CD &cd, string accountNumber)
 {
     for (CD &client : vClients)
     {
         if (client.accountNumber == accountNumber)
+        {
+            cd = client;
             return true;
+        }
     }
     return false;
 }
@@ -450,13 +463,13 @@ bool FindClientByAccountNumberAndPinCode(vector<CD> &vClients, CD &cd)
     }
     return false;
 }
-bool FindUserByUsername(vector<stUN> &vUsers, stUN UN, string user_name)
+bool FindUserByUsername(vector<stUN> &vUsers, stUN &UN, string user_name)
 {
     for (stUserName &UserName : vUsers)
     {
         if (UserName.user_name == user_name)
         {
-            UN.user_name = user_name;
+            UN = UserName;
             return true;
         }
     }
@@ -549,13 +562,13 @@ short GivePermissions(string message, short featureNumber)
     int permission = 0;
     permission &= ~(1 << (featureNumber - 'a'));
     bool areYouAgreed = AreYouAgreed(message, 'y', 'n');
-    
-    if((featureNumber == 0) && areYouAgreed)
+
+    if ((featureNumber == 0) && areYouAgreed)
     {
         permission = -1;
         return permission;
     }
-    else if(areYouAgreed)
+    else if (areYouAgreed)
         permission |= (1 << (featureNumber - 'a'));
 
     return permission;
@@ -566,17 +579,29 @@ void GoBackToMainMenueForClients(vector<CD> &vClients)
     system("pause > 0");
     PerformMainMenueOptionForClients(vClients);
 }
-void GoBackToMainMenueForUsers(vector<stUN> &vUsers)
+void GoBackToMainMenueForUsers(vector<stUN> &vUsers, vector<CD> &vClients)
 {
     cout << "\n\nPress any key to back to main menue...";
     system("pause > 0");
-    PerformMainMenueOptionForUsers(vUsers);
+    PerformMainMenueOptionForUsers(vUsers, vClients);
+}
+void GoBackToManageMenueForUsers(vector<stUN> &vUsers)
+{
+    cout << "\n\nPress any key to back to main menue...";
+    system("pause > 0");
+    PerformManageUsersMenueScreen(vUsers);
 }
 void GoBackToTransactionsMenue(vector<CD> &vClients)
 {
     cout << "\n\nPress any key to go back to Transactions Menue...";
     system("pause > 0");
     PerformTransactions(vClients);
+}
+void GoBackToTransactionsMenue(vector<stUN> &vUsers)
+{
+    cout << "\n\nPress any key to go back to Transactions Menue...";
+    system("pause > 0");
+    PerformTransactions(vUsers);
 }
 
 bool isAmountExceedsTheBalance(short balance, short amount)
@@ -642,7 +667,7 @@ void Log_in()
 {
     vector<CD> vClients;
     vector<stUN> vUsers;
-    
+
     vUsers = LoadUserDataFromFileToVector(UsersFile);
     vClients = LoadClientDataFromFileToVector(ClientsFile);
 
@@ -675,7 +700,7 @@ bool MarkClientForUpdateByAccountNumber(vector<CD> &vClients, string accountNumb
     return false;
 }
 
-bool MarkUserForDeleteByUsername(vector<stUN>& vUsers, string username)
+bool MarkUserForDeleteByUsername(vector<stUN> &vUsers, string username)
 {
     for (stUserName &UserName : vUsers)
     {
@@ -687,7 +712,7 @@ bool MarkUserForDeleteByUsername(vector<stUN>& vUsers, string username)
     }
     return false;
 }
-bool MarkUserForUpdateByUsername(vector<stUN>& vUsers, string username)
+bool MarkUserForUpdateByUsername(vector<stUN> &vUsers, string username)
 {
     for (stUserName &UserName : vUsers)
     {
@@ -710,9 +735,9 @@ void PerformAddNewClient(vector<CD> &vClients)
 void PerformAddNewUser(vector<stUN> &vUsers)
 {
     system("cls");
-    ShowMainMenueOptionsScreenForUsers(enMainMenueForUsers::Add_New_User);
-    AddClients(vClients, ClientsFile);
-    SaveCleintsDataToFile(ClientsFile, vClients);
+    ShowManageMenueOptionsScreenForUsers(enManageUsersMenue::AddNewUser);
+    AddUsers(vUsers, UsersFile);
+    SaveUsersDataToFile(UsersFile, vUsers);
 }
 void PerformDeleteClient(vector<CD> &vClients)
 {
@@ -720,29 +745,29 @@ void PerformDeleteClient(vector<CD> &vClients)
     ShowMainMenueOptionsScreenForClients(enMainMenueForClients::DeleteClient);
     DeleteClientFromFileByAccountNumber(vClients);
 }
-void PerformDeleteUser(vector<stUN>& vUsers)
+void PerformDeleteUser(vector<stUN> &vUsers)
 {
     system("cls");
-    ShowMainMenueOptionsScreenForUsers(enMainMenueForUsers::DeleteUser);
-    DeleteClientFromFileByAccountNumber(vClients);
+    ShowManageMenueOptionsScreenForUsers(enManageUsersMenue::DeleteUser);
+    DeleteUserFromFileByUsername(vUsers);
 }
 void PerformDeposit(vector<CD> &vClients)
 {
     string accountNumber = GetStringInput("\nPlease enter account Number: ");
     CD cd;
-    if (FindClientByAccountNumberAndPinCode(vClients, cd, accountNumber))
+    if (FindClientByAccountNumber(vClients, accountNumber))
     {
         cout << "\nThe Following are the client details:\n";
         PrintOneClientDataLongitudinallyAndtransversely(cd, 'l');
         short depositAmount = GetValidPositiveIntegerInRange("\n\nPlease Enter Deposit Amount: ", 1, 32000);
         if (AreYouAgreed("\nAre you sure you want to make this transaction? [Y/N]: ", 'y', 'n'))
         {
-            for (CD &c : vClients)
+            for (CD &cd : vClients)
             {
-                if (c.accountNumber == cd.accountNumber)
+                if (cd.accountNumber == cd.accountNumber)
                 {
                     cd.balance += depositAmount;
-                    c.balance += depositAmount;
+                    cd.balance += depositAmount;
                     break;
                 }
             }
@@ -765,20 +790,11 @@ void PerformDeposit(vector<stUN> &vUsers)
         PrintOneUserDataLongitudinallyAndtransversely(UN, 'l');
         short depositAmount = GetValidPositiveIntegerInRange("\n\nPlease Enter Deposit Amount: ", 1, 32000);
         if (AreYouAgreed("\nAre you sure you want to make this transaction? [Y/N]: ", 'y', 'n'));
-        {
-            for (stUN &UN : vUsers)
-            {
-                if (UN.user_name == user_name)
-                {
-                    UN.balance += depositAmount;
-                    UN.balance += depositAmount;
-                    break;
-                }
-            }
-            SaveCleintsDataToFile(ClientsFile, vUsers);
-            ShowNewBalance(cd);
-            return;
-        }
+            UN.balance += depositAmount;
+
+        SaveUsersDataToFile(UsersFile, vUsers);
+        ShowNewBalance(UN);
+        return;
     }
     else
         ClientIsNotFoundStatement(accountNumber);
@@ -791,7 +807,7 @@ void PerformExit()
 void PerformLogout()
 {
     system("cls");
-    ShowMainMenueOptionsScreenForUsers(enMainMenueForUsers::Logout);
+
 }
 void PerformFindClient(vector<CD> &vClients)
 {
@@ -802,7 +818,7 @@ void PerformFindClient(vector<CD> &vClients)
 void PerformFindUser(vector<stUN> &vUsers)
 {
     system("cls");
-    ShowMainMenueOptionsScreenForUsers(enMainMenueForUsers::FindUser);
+    ShowManageMenueOptionsScreenForUsers(enMainMenueForUsers::FindUser);
     SearchForUserByUsername(vUsers);
 }
 void PerformMainMenueOptionForClients(vector<CD> &vClients)
@@ -810,11 +826,11 @@ void PerformMainMenueOptionForClients(vector<CD> &vClients)
     system("color 0f");
     system("cls");
     ShowMainMenueScreenForClients();
+    vClients = LoadClientDataFromFileToVector(ClientsFile);
 
     switch (GetMainOptionByUserForClients())
     {
     case enMainMenueForClients::ShowClientList:
-        vClients = LoadClientDataFromFileToVector(ClientsFile);
         if (isVectorEmpty(vClients))
         {
             ShowVectorIsEmpty();
@@ -828,7 +844,6 @@ void PerformMainMenueOptionForClients(vector<CD> &vClients)
         GoBackToMainMenueForClients(vClients);
         break;
     case enMainMenueForClients::DeleteClient:
-        vClients = LoadClientDataFromFileToVector(ClientsFile);
         if (isVectorEmpty(vClients))
         {
             ShowVectorIsEmpty();
@@ -838,7 +853,6 @@ void PerformMainMenueOptionForClients(vector<CD> &vClients)
         GoBackToMainMenueForClients(vClients);
         break;
     case enMainMenueForClients::UpdateClientInfo:
-        vClients = LoadClientDataFromFileToVector(ClientsFile);
         if (isVectorEmpty(vClients))
         {
             ShowVectorIsEmpty();
@@ -848,7 +862,6 @@ void PerformMainMenueOptionForClients(vector<CD> &vClients)
         GoBackToMainMenueForClients(vClients);
         break;
     case enMainMenueForClients::FindClient:
-        vClients = LoadClientDataFromFileToVector(ClientsFile);
         if (isVectorEmpty(vClients))
         {
             ShowVectorIsEmpty();
@@ -858,7 +871,6 @@ void PerformMainMenueOptionForClients(vector<CD> &vClients)
         GoBackToMainMenueForClients(vClients);
         break;
     case enMainMenueForClients::Transactions:
-        vClients = LoadClientDataFromFileToVector(ClientsFile);
         if (isVectorEmpty(vClients))
         {
             ShowVectorIsEmpty();
@@ -871,67 +883,66 @@ void PerformMainMenueOptionForClients(vector<CD> &vClients)
         break;
     }
 }
-void PerformMainMenueOptionForUsers(vector<stUN> &vUsers)
+void PerformMainMenueOptionForUsers(vector<stUN> &vUsers, vector<CD> &vClients)
 {
     system("color 0f");
     system("cls");
     ShowMainMenueScreenForUsers();
 
+    vClients = LoadClientDataFromFileToVector(ClientsFile);
+
     switch (GetMainOptionByUserForUsers())
     {
-    case enMainMenueForUsers::ShowUserList:
-        vUsers = LoadUserDataFromFileToVector(UsersFile);
+    case enMainMenueForUsers::ShowClientList:
         if (isVectorEmpty(vUsers))
         {
             ShowVectorIsEmpty();
-            GoBackToMainMenueForUsers(vUsers);
+            GoBackToMainMenueForUsers(vUsers, vClients);
         }
-        PerformShowUserList(vUsers);
-        GoBackToMainMenueForUsers(vUsers);
+        PerformShowClientList(vClients);
+        GoBackToMainMenueForUsers(vUsers, vClients);
         break;
-    case enMainMenueForUsers::Add_New_User:
-        PerformAddNewUser(vUsers);
-        GoBackToMainMenueForUsers(vUsers);
+    case enMainMenueForUsers::Add_New_Client:
+        PerformAddNewClient(vClients);
+        GoBackToMainMenueForUsers(vUsers, vClients);
         break;
-    case enMainMenueForUsers::DeleteUser:
-        vUsers = LoadUserDataFromFileToVector(UsersFile);
+    case enMainMenueForUsers::DeleteClient:
         if (isVectorEmpty(vUsers))
         {
             ShowVectorIsEmpty();
-            GoBackToMainMenueForUsers(vUsers);
+            GoBackToMainMenueForUsers(vUsers, vClients);
         }
-        PerformDeleteUser(vUsers);
-        GoBackToMainMenueForUsers(vUsers);
+        PerformDeleteClient(vClients);
+        GoBackToMainMenueForUsers(vUsers, vClients);
         break;
-    case enMainMenueForUsers::UpdateUserInfo: 
-        vUsers = LoadUserDataFromFileToVector(UsersFile);
+    case enMainMenueForUsers::UpdateClientInfo:
         if (isVectorEmpty(vUsers))
         {
             ShowVectorIsEmpty();
-            GoBackToMainMenueForUsers(vUsers);
+            GoBackToMainMenueForUsers(vUsers, vClients);
         }
-        PerformUpdateUser(vUsers);
-        GoBackToMainMenueForUsers(vUsers);
+        PerformUpdateClient(vClients);
+        GoBackToMainMenueForUsers(vUsers, vClients);
         break;
-    case enMainMenueForUsers::FindUser: 
-        vUsers = LoadUserDataFromFileToVector(ClientsFile);
-        if (isVectorEmpty(vUsers))
+    case enMainMenueForUsers::FindClient:
+        if (isVectorEmpty(vClients))
         {
             ShowVectorIsEmpty();
-            GoBackToMainMenueForUsers(vUsers);
+            GoBackToMainMenueForUsers(vUsers, vClients);
         }
-        PerformFindUser(vUsers);
-        GoBackToMainMenueForUsers(vUsers);
+        PerformFindClient(vClients);
+        GoBackToMainMenueForUsers(vUsers, vClients);
         break;
-    case enMainMenueForUsers::Transactions: 
-        vUsers = LoadUserDataFromFileToVector(UsersFile);
-        if (isVectorEmpty(vUsers))
+    case enMainMenueForUsers::Transactions:
+        if (isVectorEmpty(vClients))
         {
             ShowVectorIsEmpty();
-            GoBackToMainMenueForUsers(vUsers);
+            GoBackToMainMenueForUsers(vUsers, vClients);
         }
-        PerformTransactions(vUsers);
+        PerformTransactions(vClients);
         break;
+    case enMainMenueForUsers::ManageUsers:
+        PerformManageUsersMenueScreen(vUsers);
     case enMainMenueForUsers::Logout:
         PerformExit();
         break;
@@ -943,58 +954,62 @@ void PerformManageUsersMenueScreen(vector<stUN> &vUsers)
     system("cls");
     ShowManageUsersMenueScreen();
 
+    vUsers = LoadUserDataFromFileToVector(UsersFile);
+
+    //! i don't need to load date from file to vector as E:/Hamza told me so i won't write this here:
+    //*     vUsers = LoadUserDataFromFileToVector(UsersFile);
+    //! cause i did that in PerformMainMenueForUsers() but i think that i should write again in Manage cause if i did sth
+    //! like adding new user so, i'll need to update the vector cause after every function like adding or updating i need to
+    //! to save the vector data in the file and then it'll go back to PerformManageUsersMenueScreen() it'll need to make sure
+    //! that i updated the vector
+
     switch (GetManageUsersOption())
     {
     case enManageUsersMenue::UsersList:
-        vUsers = LoadUserDataFromFileToVector(UsersFile);
         if (isVectorEmpty(vUsers))
         {
             ShowVectorIsEmpty();
-            GoBackToMainMenueForUsers(vUsers);
+            GoBackToManageMenueForUsers(vUsers);
         }
         PerformShowUserList(vUsers);
-        GoBackToMainMenueForUsers(vUsers);
+        GoBackToManageMenueForUsers(vUsers);
         break;
     case enManageUsersMenue::AddNewUser:
         PerformAddNewUser(vUsers);
-        GoBackToMainMenueForUsers(vUsers);
+        GoBackToManageMenueForUsers(vUsers);
         break;
     case enManageUsersMenue::DeleteUser:
-        vUsers = LoadUserDataFromFileToVector(UsersFile);
         if (isVectorEmpty(vUsers))
         {
             ShowVectorIsEmpty();
-            GoBackToMainMenueForUsers(vUsers);
+            GoBackToManageMenueForUsers(vUsers);
         }
         PerformDeleteUser(vUsers);
-        GoBackToMainMenueForUsers(vUsers);
+        GoBackToManageMenueForUsers(vUsers);
         break;
     case enManageUsersMenue::UpdateUser:
-        vUsers = LoadUserDataFromFileToVector(UsersFile);
         if (isVectorEmpty(vUsers))
         {
             ShowVectorIsEmpty();
-            GoBackToMainMenueForUsers(vUsers);
+            GoBackToManageMenueForUsers(vUsers);
         }
-        PerformUpdateUser(vUsers);
-        GoBackToMainMenueForUsers(vUsers);
+        PerformUpdateClient(vUsers);
+        GoBackToManageMenueForUsers(vUsers);
         break;
     case enManageUsersMenue::FindUser:
-        vUsers = LoadUserDataFromFileToVector(ClientsFile);
         if (isVectorEmpty(vUsers))
         {
             ShowVectorIsEmpty();
-            GoBackToMainMenueForUsers(vUsers);
+            GoBackToManageMenueForUsers(vUsers);
         }
         PerformFindUser(vUsers);
-        GoBackToMainMenueForUsers(vUsers);
+        GoBackToManageMenueForUsers(vUsers);
         break;
     case enManageUsersMenue::MainMenue:
-        vUsers = LoadUserDataFromFileToVector(UsersFile);
         if (isVectorEmpty(vUsers))
         {
             ShowVectorIsEmpty();
-            GoBackToMainMenueForUsers(vUsers);
+            GoBackToManageMenueForUsers(vUsers);
         }
         PerformTransactions(vUsers);
         break;
@@ -1003,18 +1018,17 @@ void PerformManageUsersMenueScreen(vector<stUN> &vUsers)
 short PerformPermission()
 {
     short permission = GivePermissions("Do you want to give full access? [y/n] ", 0);
-    
-    if(permission == -1)
+
+    if (permission == -1)
         return permission;
-        
 
     short length = GetValidPositiveIntegerInRange("\nPlease enter the number of the features: ", 1, 10);
 
-    for(short i = 1; i <= length; ++i)
+    for (short i = 1; i <= length; ++i)
     {
-        permission = GivePermissions("Do you want to give access to Feature[" + to_string(i) + "] ? [y/n] ",i);
+        permission = GivePermissions("Do you want to give access to Feature[" + to_string(i) + "] ? [y/n] ", i);
     }
-    
+
     return permission;
 }
 void PerformShowClientList(vector<CD> &vClients)
@@ -1025,6 +1039,7 @@ void PerformShowClientList(vector<CD> &vClients)
 void PerformShowUserList(vector<stUN> &vUsers)
 {
     system("cls");
+    ShowUsersListScreen(vUsers.size());
     PrintUsersData(vUsers);
 }
 void PerformTransactions(vector<CD> &vClients)
@@ -1051,37 +1066,27 @@ void PerformTransactionsMenueOptionsForClients(vector<CD> &vClients, enTransacti
     switch (option)
     {
     case enTransactionsMenue::Deposite:
-    {
         PerformDeposit(vClients);
         GoBackToTransactionsMenue(vClients);
         break;
-    }
     case enTransactionsMenue::Withdraw:
-    {
         PerformWithdraw(vClients);
         GoBackToTransactionsMenue(vClients);
         break;
-    }
     case enTransactionsMenue::BalanceOfOneClient:
-    {
         ShowBalanceOfOneClient(vClients, option);
         GoBackToTransactionsMenue(vClients);
         break;
-    }
     case enTransactionsMenue::TotalBalance:
-    {
         ShowBalancesList(vClients);
         GoBackToTransactionsMenue(vClients);
         break;
-    }
     case enTransactionsMenue::MainMenue:
-    {
         GoBackToMainMenueForClients(vClients);
         break;
     }
-    }
 }
-void PerformTransactionsMenueOptionsForUsers(vector<stUN> &vUsers, enTransactionsMenue option)
+void PerformTransactionsMenueOptionsForUsers(vector<stUN> &vUsers, vector<CD> &vClients, enTransactionsMenue option)
 {
     system("cls");
     ShowTransactionsMenueOptionsScreen(option);
@@ -1089,34 +1094,26 @@ void PerformTransactionsMenueOptionsForUsers(vector<stUN> &vUsers, enTransaction
     switch (option)
     {
     case enTransactionsMenue::Deposite:
-    {
         PerformDeposit(vUsers);
         GoBackToTransactionsMenue(vUsers);
         break;
-    }
     case enTransactionsMenue::Withdraw:
     {
         PerformWithdraw(vUsers);
         GoBackToTransactionsMenue(vUsers);
         break;
-    }
     case enTransactionsMenue::BalanceOfOneClient:
     {
         ShowBalanceOfOneClient(vUsers, option);
-        GoBackToTransactionsMenue(vClients);
+        GoBackToTransactionsMenue(vUsers);
         break;
-    }
     case enTransactionsMenue::TotalBalance:
-    {
         ShowBalancesList(vUsers);
         GoBackToTransactionsMenue(vUsers);
         break;
-    }
     case enTransactionsMenue::MainMenue:
-    {
-        GoBackToMainMenueForClients(vUsers);
+        GoBackToMainMenueForUsers(vUsers, vClients);
         break;
-    }
     }
 }
 void PerformUpdateClient(vector<CD> &vClients)
@@ -1125,10 +1122,16 @@ void PerformUpdateClient(vector<CD> &vClients)
     ShowMainMenueOptionsScreenForClients(enMainMenueForClients::UpdateClientInfo);
     UpdateClientByAccountNumber(vClients);
 }
-void PerformUpdateUser(vector<stUN>& vUsers)
+void PerformUpdateUser(vector<stUN> &vUsers)
 {
     system("cls");
-    ShowMainMenueOptionsScreenForUsers(enMainMenueForUsers::UpdateUserInfo);
+    ShowMainMenueOptionsScreenForUsers(enMainMenueForClients::UpdateClientInfo);
+    UpdateUserByUsername(vUsers);
+}
+void PerformUpdateUser(vector<stUN> &vUsers)
+{
+    system("cls");
+    ShowManageMenueOptionsScreenForUsers(enMainMenueForUsers::UpdateUserInfo);
     UpdateUserByUsername(vUsers);
 }
 void PerformWithdraw(vector<CD> &vClients)
@@ -1150,6 +1153,26 @@ void PerformWithdraw(vector<CD> &vClients)
     else
         ClientIsNotFoundStatement(accountNumber);
 }
+void PerformWithdraw(vector<stUN> &vUsers)
+{
+    string username = GetStringInput("\nPlease enter account Number: ");
+    stUN UN;
+    
+    if (FindUserByUsername(vUsers, UN, username))
+    {
+        PrintOneUserDataLongitudinallyAndtransversely(UN, 'l');
+        short depositAmount = GetValidPositiveIntegerInRange("\nPlease Enter Deposit Amount: ", 1, 60000);
+        if (AreYouAgreed("\nAre you sure you want to make this transaction? [Y/N]: ", 'y', 'n'))
+        {
+            cd.balance -= depositAmount;
+            SaveCleintsDataToFile(ClientsFile, vClients);
+            ShowNewBalance(cd);
+            return;
+        }
+    }
+    else
+        UserIsNotFoundStatement(username);
+}
 void PrintBalanceOfOneClient(vector<CD> &vClients, CD &cd, char LongitudinallyAndtransversely)
 {
     if (LongitudinallyAndtransversely == 't')
@@ -1169,7 +1192,7 @@ void PrintBalanceOfOneClient(vector<CD> &vClients, CD &cd, char LongitudinallyAn
 void PrintClientsData(vector<CD> &vClients)
 {
     system("color 0f");
-    ShowClientsStatement(vClients.size());
+    ShowClientsListScreen(vClients.size());
     for (CD &cd : vClients)
     {
         PrintOneClientDataLongitudinallyAndtransversely(cd, 't');
@@ -1180,8 +1203,8 @@ void PrintClientsData(vector<CD> &vClients)
 void PrintUsersData(vector<stUN> &vUsers)
 {
     system("color 0f");
-    ShowClientsStatement(vUsers.size());
-    for (stUserName &UserName: vUsers)
+    ShowUsersListScreen(vUsers.size());
+    for (stUserName &UserName : vUsers)
     {
         PrintOneUserDataLongitudinallyAndtransversely(UserName, 't');
     }
@@ -1236,9 +1259,8 @@ stUserName ReadNewUserData(vector<stUN> &vUsers)
     stUN UN;
     string userName = GetStringInput("Enter user name: ");
 
-    while (FindUserByUserNameAndPassword(vUsers, userName))
+    while (FindUserByUserNameAndPassword(vUsers, UN, userName))
     {
-        
     }
 
     UN.user_name = userName;
@@ -1313,7 +1335,7 @@ void SaveCleintsUpdateToFile(string ClientsFile, vector<CD> &vClients, string ac
         myFile.close();
     }
 }
-void SaveUsersUpdateToFile(string UsersFile, vector<stUN>& vUsers, string username)
+void SaveUsersUpdateToFile(string UsersFile, vector<stUN> &vUsers, string username)
 {
     fstream myFile;
     myFile.open(UsersFile, ios::out);
@@ -1326,6 +1348,21 @@ void SaveUsersUpdateToFile(string UsersFile, vector<stUN>& vUsers, string userna
             myFile << ConvertRecordToLineForUser(UserName) << endl;
         }
         myFile.close();
+    }
+}
+void SaveUsersDataToFile(string UsersFile, vector<stUN> &vUsers)
+{
+    fstream myFile;
+    myFile.open(UsersFile, ios::out | ios::app); //! الحمد لله غيرت المود للإضافة بدلا من الكتابة او القراءة
+
+    if (myFile.is_open())
+    {
+        string lineOfRecord;
+        for (stUserName &UserName : vUsers)
+        {
+            lineOfRecord = ConvertRecordToLineForUser(UserName);
+            myFile << lineOfRecord << endl;
+        }
     }
 }
 void SearchForClientsByAccountNumber(vector<CD> &vClients)
@@ -1342,7 +1379,7 @@ void SearchForClientsByAccountNumber(vector<CD> &vClients)
     else
         ClientIsNotFoundStatement(accountNumber);
 }
-void SearchForUserByUsername(vector<stUN>& vUsers)
+void SearchForUserByUsername(vector<stUN> &vUsers)
 {
     stUN UN;
     cin.ignore(numeric_limits<streamsize>::max(), '\n');
@@ -1357,6 +1394,11 @@ void SearchForUserByUsername(vector<stUN>& vUsers)
         UserIsNotFoundStatement(username);
 }
 void ShowBalancesList(vector<CD> &vClients)
+{
+    ShowBalancesStatement(vClients);
+    ShowBalancesOfClients(vClients);
+}
+void ShowBalancesList(vector<stUN> &vUsers))
 {
     ShowBalancesStatement(vClients);
     ShowBalancesOfClients(vClients);
@@ -1400,7 +1442,7 @@ void ShowBalancesStatement(vector<CD> &vClients)
          << "\n____________________________________________________________________________________________"
          << endl;
 }
-void ShowClientsStatement(size_t ClientsNumber)
+void ShowClientsListScreen(size_t ClientsNumber)
 {
     cout << "\n"
          << Tabs(2) << "Client List [" << ClientsNumber << "] Client(s)\n"
@@ -1415,6 +1457,19 @@ void ShowClientsStatement(size_t ClientsNumber)
          << "-------------------------------------------------"
          << "--------------------------------------------------" << endl;
 }
+void ShowUsersListScreen(size_t vUsers)
+{
+    cout << "\n"
+         << Tabs(2) << "Users List [" << sizeof(vUsers) << "] User(s).\n"
+         << "-------------------------------------------------"
+         << "--------------------------------------------------" << endl
+         << "| " << setw(30) << left << "Username"
+         << "| " << setw(15) << left << "Password "
+         << "| " << setw(40) << left << "Permission "
+         << "|" << endl
+         << "-------------------------------------------------"
+         << "--------------------------------------------------" << endl;
+}
 void ShowLogInScreen()
 {
     cout << "-----------------------------------------------------\n";
@@ -1424,6 +1479,10 @@ void ShowLogInScreen()
 void ShowNewBalance(CD &cd)
 {
     cout << "\nDone Successfully, New Balance is " << cd.balance;
+}
+void ShowNewBalance(stUN &UN)
+{
+    cout << "\nDone Successfully, New Balance is " << UN.balance;
 }
 void ShowMainMenueScreenForClients()
 {
@@ -1459,131 +1518,77 @@ void ShowMainMenueOptionsScreenForClients(enMainMenueForClients option)
     switch (option)
     {
     case enMainMenueForClients::Add_New_Client:
-    {
         cout << "----------------------------------------\n";
         cout << Tabs(1) << "Add New Clients Screen\n";
         cout << "----------------------------------------";
         break;
-    }
     case enMainMenueForClients::DeleteClient:
-    {
         cout << "----------------------------------------\n";
         cout << Tabs(1) << "Delete Client Screen\n";
         cout << "----------------------------------------";
         break;
-    }
     case enMainMenueForClients::UpdateClientInfo:
-    {
         cout << "----------------------------------------\n";
         cout << Tabs(1) << "Update Client Info Screen\n";
         cout << "----------------------------------------";
         break;
-    }
     case enMainMenueForClients::FindClient:
-    {
         cout << "----------------------------------------\n";
         cout << Tabs(1) << "Find Client Screen\n";
         cout << "----------------------------------------";
         break;
-    }
     case enMainMenueForClients::Exit:
-    {
         cout << "----------------------------------------\n";
         cout << Tabs(1) << "Program Ends:-)\n";
         cout << "----------------------------------------\n";
         break;
-    }
     }
 }
 void ShowManageMenueOptionsScreen(enManageUsersMenue option, vector<stUN> &vUsers)
 {
     switch (option)
     {
-    case enManageUsersMenue::UsersList:
-    {
-        cout << "------------------------------------------------------------------------------\n"
-             << Tabs(2) << "Users List (" << vUsers.size() << ") User(s).\n"
-             << "------------------------------------------------------------------------------\n"
-             << "| " << setw(30) << left << "User Name"
-             << "| " << setw(15) << left << "Password"
-             << "| " << setw(40) << left << "Permissions"
-             << "| " 
-             << "\n------------------------------------------------------------------------------"<< endl; //? clear the buffer.
-        break;
-    }
     case enManageUsersMenue::DeleteUser:
-    {
         cout << "----------------------------------------\n";
         cout << Tabs(1) << "Delete User Screen\n";
         cout << "----------------------------------------";
         break;
-    }
-    case enManageUsersMenue::UpdateUser
-    {
+    case enManageUsersMenue::UpdateUser:
         cout << "----------------------------------------\n";
         cout << Tabs(1) << "Update User Info Screen\n";
         cout << "----------------------------------------";
         break;
-    }
     case enManageUsersMenue::FindUser:
-    {
         cout << "----------------------------------------\n";
         cout << Tabs(1) << "Find User Screen\n";
         cout << "----------------------------------------";
         break;
     }
-    case enManageUsersMenue::MainMenue:
-    {
-        GoBackToMainMenueForUsers(vUsers);
-    }
-    }
 }
-void ShowMainMenueOptionsScreenForUsers(enMainMenueForUsers option)
+void ShowManageMenueOptionsScreenForUsers(enManageUsersMenue option)
 {
     switch (option)
     {
-    case enMainMenueForUsers::ShowUserList:
-    {
+    case enManageUsersMenue::AddNewUser:
         cout << "----------------------------------------\n";
         cout << Tabs(1) << "Add New User Screen\n";
         cout << "----------------------------------------";
         break;
-    }
-    case enMainMenueForUsers::Add_New_User:
-    {
-        cout << "----------------------------------------\n";
-        cout << Tabs(1) << "Add New User Screen\n";
-        cout << "----------------------------------------";
-        break;
-    }
-    case enMainMenueForUsers::DeleteUser:
-    {
+    case enManageUsersMenue::DeleteUser:
         cout << "----------------------------------------\n";
         cout << Tabs(1) << "Delete User Screen\n";
         cout << "----------------------------------------";
         break;
-    }
-    case enMainMenueForUsers::UpdateUserInfo:
-    {
+    case enMainMenueForUsers::UpdateClientInfo:
         cout << "----------------------------------------\n";
         cout << Tabs(1) << "Update User Info Screen\n";
         cout << "----------------------------------------";
         break;
-    }
-    case enMainMenueForUsers::FindUser:
-    {
+    case enMainMenueForUsers::FindClient:
         cout << "----------------------------------------\n";
         cout << Tabs(1) << "Find User Screen\n";
         cout << "----------------------------------------";
         break;
-    }
-    case enMainMenueForUsers::Logout:
-    {
-        cout << "----------------------------------------\n";
-        cout << Tabs(1) << "Program Ends:-)\n";
-        cout << "----------------------------------------\n";
-        break;
-    }
     }
 }
 void ShowManageUsersMenueScreen()
@@ -1628,26 +1633,20 @@ void ShowTransactionsMenueOptionsScreen(enTransactionsMenue option)
     switch (option)
     {
     case enTransactionsMenue::Deposite:
-    {
         cout << "----------------------------------------\n";
         cout << Tabs(1) << "Depsit Screen\n";
         cout << "----------------------------------------";
         break;
-    }
     case enTransactionsMenue::Withdraw:
-    {
         cout << "----------------------------------------\n";
         cout << Tabs(1) << "Withdraw Screen\n";
         cout << "----------------------------------------";
         break;
-    }
     case enTransactionsMenue::BalanceOfOneClient:
-    {
         cout << "----------------------------------------\n";
         cout << Tabs(1) << "Balance Of One Client\n";
         cout << "----------------------------------------";
         break;
-    }
     }
 }
 void ShowVectorIsEmpty()
@@ -1700,13 +1699,12 @@ void UpdateClientByAccountNumber(vector<CD> &vClients)
     cout << "\nUpdate Client\n";
     cin.ignore(numeric_limits<streamsize>::max(), '\n');
     string accountNumber = GetStringInput("\nPlease Enter Account Number To Update it: ");
-    char answer = 'n';
-
-    if (FindClientByAccountNumberAndPinCode(vClients, cd, accountNumber))
+  
+    if (FindClientByAccountNumber(vClients, cd, accountNumber))
     {
         cout << "\nThe Following are the Client Details \n";
         PrintOneClientDataLongitudinallyAndtransversely(cd, 'l');
-        
+
         if (AreYouAgreed("\nAre you sure you want to make this transaction? [Y/N]: ", 'y', 'n'))
         {
             MarkClientForUpdateByAccountNumber(vClients, accountNumber);
@@ -1721,19 +1719,18 @@ void UpdateClientByAccountNumber(vector<CD> &vClients)
     else
         ClientIsNotFoundStatement(accountNumber);
 }
-void UpdateUserByUsername(vector<stUN>& vUsers)
+void UpdateUserByUsername(vector<stUN> &vUsers)
 {
-    CD cd;
+    stUN UN;
     cout << "\nUpdate User\n";
     cin.ignore(numeric_limits<streamsize>::max(), '\n');
     string username = GetStringInput("\nPlease Enter Username To Update it: ");
-    char answer = 'n';
 
-    if (FindUserByUsername(vUsers, username))
+    if (FindUserByUsername(vUsers, UN, username))
     {
         cout << "\nThe Following are the Client Details \n";
-        PrintOneClientDataLongitudinallyAndtransversely(cd, 'l');
-        
+        PrintOneUserDataLongitudinallyAndtransversely(UN, 'l');
+
         if (AreYouAgreed("\nAre you sure you want to make this transaction? [Y/N]: ", 'y', 'n'))
         {
             MarkUserForUpdateByUsername(vUsers, username);
@@ -1747,13 +1744,6 @@ void UpdateUserByUsername(vector<stUN>& vUsers)
     }
     else
         UserIsNotFoundStatement(username);
-}
-void UserIsFound(string username)
-{
-    cout << "\a";
-    system("color 0c");
-    cout << "User With[" << userName << "] already exists, Enter another user name: ";
-    getline(cin >> ws, userName);
 }
 void UserIsNotFoundStatement(string username)
 {
