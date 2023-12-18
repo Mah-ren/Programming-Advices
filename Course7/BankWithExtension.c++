@@ -33,7 +33,7 @@ typedef struct stClientData
     string pinCode;
     string name;
     string phone;
-    double balance = 0;
+    short balance = 0;
     short numberOfClients = 0;
     bool markForDeleting = false;
     bool markForUpdating = false;
@@ -62,7 +62,7 @@ void GoBackToMainMenue(vector<CD> vClients);
 void GoBackToTransactionsMenue(vector<CD> vClients);
 
 bool isVectorEmpty(vector<CD> vClients);
-
+bool isAmountExceedsTheBalance(CD cd, short withdrawAmount);
 vector<CD> LoadDataFromFileToVector(string);
 
 bool MarkClientForDeleteByAccountNumber(vector<CD> &vClients, string accountNumber);
@@ -74,7 +74,7 @@ void PerformAddNewClient(vector<CD> &vClients);
 void PerformDeposit(vector<CD> &vClients);
 void PerformMainMenueOption(vector<CD> vClients);
 void PerformShowClientList(vector<CD> vClients);
-void PerformTransactions(vector<CD> vClients);
+void PerformTransactions(vector<CD> &vClients);
 void PerformTransactionsMenueOptions(vector<CD> &vClients, enTransactionsMenue option);
 void PerformUpdateClient(vector<CD> &vClients);
 void PerformWithdraw(vector<CD> &vClients);
@@ -256,7 +256,7 @@ int GetValidPositiveIntegerInRange(string message, short min, short max)
             continue; // Prompt user again
         }
 
-    } while (number < min && number > max);
+    } while (number < min || number > max);
 
     return number;
 }
@@ -277,7 +277,7 @@ short GetValidPositiveShortIntegerInRange(string message, short min, short max)
             continue; // Prompt user again
         }
 
-    } while (number < min && number > max);
+    } while (number < min || number > max);
 
     return number;
 }
@@ -312,14 +312,16 @@ void GoBackToTransactionsMenue(vector<CD> vClients)
     system("pause > 0");
     PerformTransactions(vClients);
 }
-
-bool isAmountExceedsTheBalance(short balance, short amount)
+     
+bool isAmountExceedsTheBalance(CD cd, short amount)
 {
-    if(amount > balance)
+    while (amount > cd.balance)
     {
-        cout << "\nAmount Exceeds the balance, you can withdraw up to: " << balance 
+        cout << "\nAmount Exceeds the balance, you can withdraw up to: " << cd.balance 
              << "\nPlease Enter another amount: ";
+        cin >> amount;
     }
+    return true;
 }
 bool isVectorEmpty(vector<CD> vClients)
 {
@@ -378,7 +380,6 @@ void PerformAddNewClient(vector<CD> &vClients)
     system("cls");
     ShowMainMenueOptionsScreen(enMainMenue::Add_New_Client);
     AddClients(vClients, fileName);
-//    SaveClientsDataToFile(fileName, vClients);
 }
 void PerformDeleteClient(vector<CD> &vClients)
 {
@@ -394,7 +395,10 @@ void PerformDeposit(vector<CD> &vClients)
     {
         cout << "\nThe Following are the client details:\n";
         PrintOneClientDataLongitudinallyAndtransversely(cd, 'l');
-        short depositAmount = GetValidPositiveIntegerInRange("\n\nPlease Enter Deposit Amount: ", 1, 32000);
+        
+        short depositAmount = 1;
+        depositAmount = GetValidPositiveIntegerInRange("\n\nPlease Enter Deposit Amount: ", 1, 32000);
+
         if(ShowAreYouSure())
         {
             for(CD &c : vClients)
@@ -552,15 +556,19 @@ void PerformWithdraw(vector<CD> &vClients)
     if(FindClientByAccountNumber(vClients, cd, accountNumber))
     {
         PrintOneClientDataLongitudinallyAndtransversely(cd, 'l');
-        short withdraw = GetValidPositiveIntegerInRange("\nPlease Enter Withdraw Amount: ", 1, 60000);
-        if(ShowAreYouSure())
+       
+        short withdrawAmount = 1;
+        cout << "\nPlease Enter Withdraw Amount: ";
+        cin >> withdrawAmount;        
+        
+        if(isAmountExceedsTheBalance(cd, withdrawAmount))
         {
             for(CD &c : vClients)
             {
                 if(c.accountNumber == cd.accountNumber)
                 {
-                    cd.balance -= withdraw;
-                    c.balance  -= withdraw;
+                    cd.balance -= withdrawAmount;
+                    c.balance  -= withdrawAmount;
                     break;
                 }
             }
@@ -659,7 +667,7 @@ CD ReadNewClientData(vector<CD> vClients)
 void SaveClientsDataToFile(string fileName, vector<CD> &vClients)
 {
     fstream myFile;
-    myFile.open(fileName, ios::out | ios::app); //! الحمد لله غيرت المود للإضافة بدلا من الكتابة او القراءة 
+    myFile.open(fileName, ios::out); //! الحمد لله غيرت المود للإضافة بدلا من الكتابة او القراءة 
     if (myFile.is_open())
     {
         string lineOfRecord;
