@@ -1,57 +1,47 @@
 #include <iostream>
+#include <limits>
 #include <string>
 using namespace std;
 
 struct stDate
 {
 	int year = 1;
-	short month = 1;
-	short day = 1;
+	int month = 1;
+	int day = 1;
 };
 
-string ConvertTotalDaysToDate(int, short);
-short DaysFromBeggingOfYear(int, short, short);
+string ConvertTotalDaysToDate(int, int);
+int DaysFromBeggingOfYear(stDate);
+int GetValidPositiveIntegerInRange(string message, int min, int max);
 bool isLeapYear(int);
-short NumberOfDaysInMonth(int, short);
-short NumberOfDaysInMonthInNotLeapYear(int, short);
+int NumberOfDaysInMonth(stDate);
+int NumberOfDaysInMonthInNotLeapYear(stDate);
 
 int main()
 {	
-    
-
-	int year = 1;
-	short month = 1, day = 1;
-
+    stDate Date;
     cout << "\nPlease Enter Your Date Of Birth:\n";
-	cout << "\nPlease Enter a Day: ";
-	cin >> day;
 
-	cout << "\nPlease Enter a Month: ";
-	cin >> month;
+	Date.day = GetValidPositiveIntegerInRange("\nPlease Enter a Day: ", 1, 31);
+	Date.month =GetValidPositiveIntegerInRange("\nPlease Enter a Month: ", 1, 12);
+	Date.year = GetValidPositiveIntegerInRange("\nPlease Enter a Year: ", 1, 3000);
 
-	cout << "\nPlease Enter a Year: ";
-	cin >> year;
-
-	short daysFromBeggingOfYea r = DaysFromBeggingOfYear(year, month, day);
-
-	cout << "\nNumber Of Days From Beginning Of Year is: " << daysFromBeggingOfYear;
-
+	int daysFromBeggingOfYear  = DaysFromBeggingOfYear(Date);
 	cout << "\nThis is the new function :-)\n";
-
-	cout << "\nDate for [" << daysFromBeggingOfYear << "] is: " << ConvertTotalDaysToDate(year, daysFromBeggingOfYear);
+	cout << "\nDate for [" << daysFromBeggingOfYear << "] is: " << ConvertTotalDaysToDate(Date.year, daysFromBeggingOfYear);
 
 
 }
 
-short DaysFromBeggingOfYear(int year, short month, short day)
+int DaysFromBeggingOfYear(stDate Date)
 {
-	short numberOfDaysInAMonth = 0;
+	int numberOfDaysInAMonth = 0;
 
-	for (short i = 1; i < month; i++)
+	for (int i = 1; i < Date.month; i++)
 	{
-		numberOfDaysInAMonth += NumberOfDaysInMonth(year, i);
+		numberOfDaysInAMonth += NumberOfDaysInMonth(Date);
 	}
-	return numberOfDaysInAMonth += day;
+	return numberOfDaysInAMonth += Date.day;
 }
 
 bool isLeapYear(int year)
@@ -59,28 +49,28 @@ bool isLeapYear(int year)
 	return(year % 4 == 0 && year % 100 != 0) || (year % 400 == 0);
 }
 
-short NumberOfDaysInMonthInNotLeapYear(int year, short month)
+int NumberOfDaysInMonthInNotLeapYear(stDate Date)
 {
-	short array[] = { 1, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
+	int array[] = { 1, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
 
-	return array[month];
+	return array[Date.month];
 }
 
-short NumberOfDaysInMonth(int year, short month)
+int NumberOfDaysInMonth(stDate Date)
 {
-	return((isLeapYear(year) && month == 2) ? 29 : NumberOfDaysInMonthInNotLeapYear(year, month));
+	return((isLeapYear(Date.year) && Date.month == 2) ? 29 : NumberOfDaysInMonthInNotLeapYear(Date));
 }
 
-string ConvertTotalDaysToDate(int year, short daysFromBeggingOfYear)
+string ConvertTotalDaysToDate(int year, int daysFromBeggingOfYear)
 {
 	stDate Date;
 	Date.year = year;
 	Date.month = 1;
-	short remainingDays = daysFromBeggingOfYear;
-	short numberOfDaysInMonth = 1;
+	int remainingDays = daysFromBeggingOfYear;
+	int numberOfDaysInMonth = 1;
 	while (true)
 	{
-		numberOfDaysInMonth = NumberOfDaysInMonth(Date.year, Date.month);
+		numberOfDaysInMonth = NumberOfDaysInMonth(Date);
 		if (remainingDays > numberOfDaysInMonth)
 		{
 			remainingDays -= numberOfDaysInMonth;
@@ -94,4 +84,26 @@ string ConvertTotalDaysToDate(int year, short daysFromBeggingOfYear)
 	}
 
 	return to_string(Date.day) + "/" + to_string(Date.month) + "/" + to_string(Date.year);
+}
+
+int GetValidPositiveIntegerInRange(string message, int min, int max)
+{
+    int number = 1;
+
+    do
+    {
+        cout << message;
+        cin >> number;
+
+        if (cin.fail()) // Check if extraction failed (non-integer input)
+        {
+            cin.clear();                                         // Clear the error flag
+            cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Ignore invalid input
+            cout << "\nInvalid input. Please enter a positive integer." << endl;
+            continue; // Prompt user again
+        }
+
+    } while (number < min || number > max);
+
+    return number;
 }

@@ -6,25 +6,25 @@
 #include <vector>
 #include <limits>
 using namespace std;
-string fileName = "Bank1WithExtension.txt";
+string fileName = "Clients.txt";
 
 enum enMainMenue
 {
-    ShowClientList   = 1,
-    Add_New_Client   = 2,
-    DeleteClient     = 3,
+    ShowClientList = 1,
+    Add_New_Client = 2,
+    DeleteClient = 3,
     UpdateClientInfo = 4,
-    FindClient       = 5,
-    Transactions     = 6,
-    Exit             = 7
+    FindClient = 5,
+    Transactions = 6,
+    Exit = 7
 };
 enum enTransactionsMenue
 {
-    Deposite           = 1, 
-    Withdraw           = 2, 
+    Deposite = 1,
+    Withdraw = 2,
     BalanceOfOneClient = 3,
-    TotalBalance       = 4,
-    MainMenue          = 5
+    TotalBalance = 4,
+    MainMenue = 5
 };
 
 typedef struct stClientData
@@ -74,7 +74,7 @@ void PerformAddNewClient(vector<CD> &vClients);
 void PerformDeposit(vector<CD> &vClients);
 void PerformMainMenueOption(vector<CD> vClients);
 void PerformShowClientList(vector<CD> vClients);
-void PerformTransactions(vector<CD> vClients);
+void PerformTransactions(vector<CD> &vClients);
 void PerformTransactionsMenueOptions(vector<CD> &vClients, enTransactionsMenue option);
 void PerformUpdateClient(vector<CD> &vClients);
 void PerformWithdraw(vector<CD> &vClients);
@@ -105,16 +105,14 @@ void UpdateClientByAccountNumber(vector<CD> &vClients);
 
 //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-
 int main()
 {
     vector<CD> vClients;
     vClients = LoadDataFromFileToVector(fileName);
-    
+
     PerformMainMenueOption(vClients);
     return 0;
-}
-//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+} ////////////////////////////////////////////////////////////////////////////////////////
 //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 void AddClients(vector<CD> &vClients, string fileName, string delimiter)
@@ -149,7 +147,7 @@ void AddDataLineToFile(string fileName, string dataLine)
 CD ChangeClientRecord(string AccountNumber)
 {
     CD cd;
-    
+
     cd.accountNumber = AccountNumber;
     cout << "\n\nEnter PinCode: ";
     getline(cin >> ws, cd.pinCode);
@@ -277,7 +275,7 @@ short GetValidPositiveShortIntegerInRange(string message, short min, short max)
             continue; // Prompt user again
         }
 
-    } while (number < min && number > max);
+    } while (number < min || number > max);
 
     return number;
 }
@@ -315,11 +313,12 @@ void GoBackToTransactionsMenue(vector<CD> vClients)
 
 bool isAmountExceedsTheBalance(short balance, short amount)
 {
-    if(amount > balance)
+    if (amount > balance)
     {
-        cout << "\nAmount Exceeds the balance, you can withdraw up to: " << balance 
+        cout << "\nAmount Exceeds the balance, you can withdraw up to: " << balance
              << "\nPlease Enter another amount: ";
     }
+    return true;
 }
 bool isVectorEmpty(vector<CD> vClients)
 {
@@ -378,7 +377,7 @@ void PerformAddNewClient(vector<CD> &vClients)
     system("cls");
     ShowMainMenueOptionsScreen(enMainMenue::Add_New_Client);
     AddClients(vClients, fileName);
-//    SaveClientsDataToFile(fileName, vClients);
+    // SaveClientsDataToFile(fileName, vClients);
 }
 void PerformDeleteClient(vector<CD> &vClients)
 {
@@ -390,19 +389,19 @@ void PerformDeposit(vector<CD> &vClients)
 {
     string accountNumber = GetStringInput("\nPlease enter account Number: ");
     CD cd;
-    if(FindClientByAccountNumber(vClients, cd, accountNumber))
+    if (FindClientByAccountNumber(vClients, cd, accountNumber))
     {
         cout << "\nThe Following are the client details:\n";
         PrintOneClientDataLongitudinallyAndtransversely(cd, 'l');
         short depositAmount = GetValidPositiveIntegerInRange("\n\nPlease Enter Deposit Amount: ", 1, 32000);
-        if(ShowAreYouSure())
+        if (ShowAreYouSure())
         {
-            for(CD &c : vClients)
+            for (CD &c : vClients)
             {
-                if(c.accountNumber == cd.accountNumber)
+                if (c.accountNumber == cd.accountNumber)
                 {
                     cd.balance += depositAmount;
-                    c.balance  += depositAmount;
+                    c.balance += depositAmount;
                     break;
                 }
             }
@@ -426,17 +425,18 @@ void PerformFindClient(vector<CD> vClients)
     SearchForClientsByAccountNumber(vClients);
 }
 void PerformMainMenueOption(vector<CD> vClients)
-{    
+{
     system("color 0f");
     system("cls");
-    
-    ShowMainMenueScreen();   
+
+    ShowMainMenueScreen();
+
     vClients = LoadDataFromFileToVector(fileName);
-    
-    switch(GetMainOptionByUser())
+
+    switch (GetMainOptionByUser())
     {
     case enMainMenue::ShowClientList:
-        if(isVectorEmpty(vClients))
+        if (isVectorEmpty(vClients))
         {
             ShowVectorIsEmpty();
             GoBackToMainMenue(vClients);
@@ -444,12 +444,12 @@ void PerformMainMenueOption(vector<CD> vClients)
         PerformShowClientList(vClients);
         GoBackToMainMenue(vClients);
         break;
-    case enMainMenue::Add_New_Client: 
+    case enMainMenue::Add_New_Client:
         PerformAddNewClient(vClients);
         GoBackToMainMenue(vClients);
         break;
     case enMainMenue::DeleteClient:
-        if(isVectorEmpty(vClients))
+        if (isVectorEmpty(vClients))
         {
             ShowVectorIsEmpty();
             GoBackToMainMenue(vClients);
@@ -458,7 +458,7 @@ void PerformMainMenueOption(vector<CD> vClients)
         GoBackToMainMenue(vClients);
         break;
     case enMainMenue::UpdateClientInfo:
-        if(isVectorEmpty(vClients))
+        if (isVectorEmpty(vClients))
         {
             ShowVectorIsEmpty();
             GoBackToMainMenue(vClients);
@@ -467,7 +467,7 @@ void PerformMainMenueOption(vector<CD> vClients)
         GoBackToMainMenue(vClients);
         break;
     case enMainMenue::FindClient:
-        if(isVectorEmpty(vClients))
+        if (isVectorEmpty(vClients))
         {
             ShowVectorIsEmpty();
             GoBackToMainMenue(vClients);
@@ -476,7 +476,7 @@ void PerformMainMenueOption(vector<CD> vClients)
         GoBackToMainMenue(vClients);
         break;
     case enMainMenue::Transactions:
-        if(isVectorEmpty(vClients))
+        if (isVectorEmpty(vClients))
         {
             ShowVectorIsEmpty();
             GoBackToMainMenue(vClients);
@@ -493,10 +493,10 @@ void PerformShowClientList(vector<CD> vClients)
     system("cls");
     PrintClientsData(vClients);
 }
-void PerformTransactions(vector<CD> &vClients)
+void PerformTransactions(vector<CD> vClients)
 {
     system("color 0f");
-    system("cls");   
+    system("cls");
     ShowTransactionsMenueScreen();
     enTransactionsMenue option;
     PerformTransactionsMenueOptions(vClients, (option = GetTransactionOptionByUser()));
@@ -505,14 +505,14 @@ void PerformTransactionsMenueOptions(vector<CD> &vClients, enTransactionsMenue o
 {
     system("cls");
     ShowTransactionsMenueOptionsScreen(option);
-    
-    switch(option)
+
+    switch (option)
     {
     case enTransactionsMenue::Deposite:
     {
         PerformDeposit(vClients);
         GoBackToTransactionsMenue(vClients);
-        break;   
+        break;
     }
     case enTransactionsMenue::Withdraw:
     {
@@ -549,21 +549,22 @@ void PerformWithdraw(vector<CD> &vClients)
 {
     string accountNumber = GetStringInput("\nPlease enter account Number: ");
     CD cd;
-    if(FindClientByAccountNumber(vClients, cd, accountNumber))
+    if (FindClientByAccountNumber(vClients, cd, accountNumber))
     {
         PrintOneClientDataLongitudinallyAndtransversely(cd, 'l');
-        short withdraw = GetValidPositiveIntegerInRange("\nPlease Enter Withdraw Amount: ", 1, 60000);
-        if(ShowAreYouSure())
+        short depositAmount = GetValidPositiveIntegerInRange("\nPlease Enter Withdraw Amount: ", 1, 60000);
+        if (ShowAreYouSure())
         {
-            for(CD &c : vClients)
+            for (CD &c : vClients)
             {
-                if(c.accountNumber == cd.accountNumber)
+                if (c.accountNumber == cd.accountNumber)
                 {
-                    cd.balance -= withdraw;
-                    c.balance  -= withdraw;
+                    cd.balance -= depositAmount;
+                    c.balance -= depositAmount;
                     break;
                 }
             }
+
             SaveClientsDataToFile(fileName, vClients);
             ShowNewBalance(cd);
             return;
@@ -571,16 +572,15 @@ void PerformWithdraw(vector<CD> &vClients)
     }
     else
         ClientsIsNotFoundStatement(accountNumber);
-    
 }
 void PrintBalanceOfOneClient(vector<CD> vClients, CD cd, char LongitudinallyAndtransversely)
 {
     if (LongitudinallyAndtransversely == 't')
-    {   
-    cout << "| " << setw(15) << left << cd.accountNumber
-         << "| " << setw(40) << left << cd.name
-         << "| " << setw(30) << left << cd.balance
-         << "|" << endl;
+    {
+        cout << "| " << setw(15) << left << cd.accountNumber
+             << "| " << setw(40) << left << cd.name
+             << "| " << setw(30) << left << cd.balance
+             << "|" << endl;
     }
     else if (LongitudinallyAndtransversely == 'l')
     {
@@ -588,7 +588,6 @@ void PrintBalanceOfOneClient(vector<CD> vClients, CD cd, char LongitudinallyAndt
         cout << "\nName          : " << cd.name;
         cout << "\nBalance       : " << cd.balance;
     }
-    
 }
 void PrintClientsData(vector<CD> vClients)
 {
@@ -606,13 +605,13 @@ void PrintOneClientDataLongitudinallyAndtransversely(CD cd, char LongitudinallyA
     system("color 0f");
 
     if (LongitudinallyAndtransversely == 't')
-    {   
-    cout << "| " << setw(15) << left << cd.accountNumber
-         << "| " << setw(10) << left << cd.pinCode
-         << "| " << setw(40) << left << cd.name
-         << "| " << setw(12) << left << cd.phone
-         << "| " << setw(12) << left << cd.balance
-         << "|" << endl;
+    {
+        cout << "| " << setw(15) << left << cd.accountNumber
+             << "| " << setw(10) << left << cd.pinCode
+             << "| " << setw(40) << left << cd.name
+             << "| " << setw(12) << left << cd.phone
+             << "| " << setw(12) << left << cd.balance
+             << "|" << endl;
     }
     else if (LongitudinallyAndtransversely == 'l')
     {
@@ -622,15 +621,14 @@ void PrintOneClientDataLongitudinallyAndtransversely(CD cd, char LongitudinallyA
         cout << "\nPhone         : " << cd.phone;
         cout << "\nBalance       : " << cd.balance;
     }
-    
 }
 
 CD ReadNewClientData(vector<CD> vClients)
 {
     CD cd;
-   string accountNumber = GetStringInput("Enter Account Number: ");
-    
-    while(FindClientByAccountNumber(vClients, accountNumber))
+    string accountNumber = GetStringInput("Enter Account Number: ");
+
+    while (FindClientByAccountNumber(vClients, accountNumber))
     {
         cout << "\a";
         system("color 0c");
@@ -659,11 +657,11 @@ CD ReadNewClientData(vector<CD> vClients)
 void SaveClientsDataToFile(string fileName, vector<CD> &vClients)
 {
     fstream myFile;
-    myFile.open(fileName, ios::out | ios::app); //! الحمد لله غيرت المود للإضافة بدلا من الكتابة او القراءة 
+    myFile.open(fileName, ios::out); //! الحمد لله غيرت المود للإضافة بدلا من الكتابة او القراءة
     if (myFile.is_open())
     {
         string lineOfRecord;
-        for(CD &cd: vClients)
+        for (CD &cd : vClients)
         {
             lineOfRecord = ConvertRecordToLineForClient(cd);
             myFile << lineOfRecord << endl;
@@ -717,28 +715,26 @@ void SearchForClientsByAccountNumber(vector<CD> vClients)
         PrintOneClientDataLongitudinallyAndtransversely(cd, 'l');
     }
     else
-        ClientsIsNotFoundStatement(accountNumber);     
+        ClientsIsNotFoundStatement(accountNumber);
 }
 bool ShowAreYouSure()
 {
     char c;
-    
+
     cout << "\nAre You Sure You want to perform this transaction? ";
-    cin  >> c;
+    cin >> c;
 
     return (tolower(c) == 'y') ? true : false;
-
 }
 void ShowBalancesList(vector<CD> vClients)
 {
     ShowBalancesStatement(vClients);
     ShowBalancesOfClients(vClients);
-
 }
 void ShowBalancesOfClients(vector<CD> vClients)
 {
     system("color 0f");
-    if(isVectorEmpty(vClients))
+    if (isVectorEmpty(vClients))
         return;
     for (CD &cd : vClients)
     {
@@ -750,27 +746,27 @@ void ShowBalancesOfClients(vector<CD> vClients)
 void ShowBalanceOfOneClient(vector<CD> vClients, enTransactionsMenue option)
 {
     system("color 0f");
-    if(isVectorEmpty(vClients))
+    if (isVectorEmpty(vClients))
     {
         ShowVectorIsEmpty();
     }
 
     string accountNumber = GetStringInput("\nPlease Enter Account Number: ");
     CD cd;
-    if(FindClientByAccountNumber(vClients, cd, accountNumber))
+    if (FindClientByAccountNumber(vClients, cd, accountNumber))
         PrintBalanceOfOneClient(vClients, cd, 'l');
-    else 
+    else
         ClientsIsNotFoundStatement(accountNumber);
 }
 void ShowBalancesStatement(vector<CD> vClients)
 {
-    cout << "\n" 
-         << Tabs(2) << "Balances List (" << vClients.size() <<") Client(s)." 
+    cout << "\n"
+         << Tabs(2) << "Balances List (" << vClients.size() << ") Client(s)."
          << "\n____________________________________________________________________________________________\n"
          << "| " << setw(15) << left << "Account Number"
-         << "| " << setw(40) << left << "Client Name" 
-         << "| " << setw(30) << left << "Balance" 
-         << "| " 
+         << "| " << setw(40) << left << "Client Name"
+         << "| " << setw(30) << left << "Balance"
+         << "| "
          << "\n____________________________________________________________________________________________"
          << endl;
 }
@@ -862,7 +858,7 @@ void ShowTransactionsMenueScreen()
 }
 void ShowTransactionsMenueOptionsScreen(enTransactionsMenue option)
 {
-    switch(option)
+    switch (option)
     {
     case enTransactionsMenue::Deposite:
     {
@@ -892,7 +888,7 @@ void ShowVectorIsEmpty()
     system("color 0c");
     cout << "\nNo Clients Available In The System, you can add by"
          << "\nclicking at 2 to add clients\n";
-} 
+}
 vector<string> SplitString(string str, string delimeter)
 {
     vector<string> vLineOfData;
