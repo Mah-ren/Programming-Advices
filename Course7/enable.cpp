@@ -15,7 +15,7 @@ using namespace std;
 
 typedef struct stUserName
 {
-    string UNname;
+    string username;
     string password;
     short permissions = 0;
     bool markForDeleting = false;
@@ -36,7 +36,21 @@ void PrintPermission(stUN &UN);
 
 int main()
 {
+    vector<stUserName> vClients;
     stUN UN;
+
+
+    for(short i = i; i < 3; ++i)
+    {
+        cout << "\nPlease Enter Username: ";
+        cin << 
+    }
+
+
+
+    UN.username = "pro219";
+    UN.password = "1111";
+
     UN = PerformPermission(UN);
     PrintPermission(UN);
 

@@ -7,11 +7,24 @@
 #include <limits>
 using namespace std;
 
+//! Define features using binary representation
+#define a 0b00000001
+#define b 0b00000010
+#define c 0b00000100
+#define d 0b00001000
+#define e 0b00010000
+#define f 0b00100000
+#define g 0b01000000
+
 string ClientsFile = "Clients.txt";
 string UsersFile = "Users.txt";
 
+
+
+
 enum enPermissions
 {
+    fullAccess = -1, 
     showClients = 1, 
     addClient = 2, 
     deleteClient = 4, 
@@ -58,6 +71,7 @@ enum enTransactionsMenue
     TotalBalance = 4,
     MainMenue = 5
 };
+
 
 typedef struct stClientData
 {
@@ -111,10 +125,11 @@ enMainMenueForUsers GetMainOptionByUserForUsers();
 string GetStringInput(string prompt);
 enTransactionsMenue GetTransactionOptionByUser();
 int GetValidPositiveIntegerInRange(string, int, int);
+short GivePermissions(string message, short featureNumber);
 void GoBackToMainMenueForClients(vector<CD> vClients, CD cd);
 void GoBackToMainMenueForUsers(vector<stUN> vUsers, vector<CD> vClients, stUserName UN, CD cd);
 void GoBackToManageMenueForUsers(vector<stUN> vUsers, vector<CD> vClients, stUserName UN, CD cd);
-void GoBackToTransactionsMenue(vector<CD> vClients, CD cd);
+void GoBackToTransactionsMenue(vector<CD> vClients);
 
 bool isVectorEmpty(vector<CD> vClients);
 bool isVectorEmpty(vector<stUN> vUsers);
@@ -139,7 +154,7 @@ void PerformFindClient(vector<CD> vClients);
 void PerformMainMenueOptionForClients(vector<CD> vClients, CD cd);
 void PerformMainMenueOptionForUsers(vector<stUN> vUsers, vector<CD> vClients, stUserName UN, CD cd);
 void PerformManageUsersMenueScreen(vector<stUN> vUsers, vector<CD> vClients, stUserName UN, CD cd);
-short PerformPermission();
+stUserName PerformPermission(stUN UN);
 void PerformShowClientList(vector<CD> vClients);
 void PerformShowUserList(vector<stUN> vUsers);
 void PerformTransactions(vector<CD> &vClients, CD &cd);
@@ -254,7 +269,7 @@ stUN AddNewUserData(vector<stUN> &vUsers)
     UN.user_name = username;
     UN.password = GetStringInput("\nEnter Password: ");
 
-    UN.permissions = PerformPermission();
+    UN = PerformPermission(UN);
     return UN;
 }
 void AddUsers(vector<stUN> &vUsers, string UsersFile, string delimiter)
@@ -333,7 +348,7 @@ stUN ChangeUserRecord(string username)
     UN.user_name = username;
     UN.password = GetStringInput("\n\nEnter Password: ");
 
-    UN.permissions = PerformPermission();
+    UN = PerformPermission(UN);
 
     return UN;
 }
@@ -368,12 +383,9 @@ stUN ConvertUserLineToRecord(string line)
 {
     vector<string> vLine;
     stUN UN;
-
     vLine = SplitString(line);
-    
     UN.user_name = vLine[0];
     UN.password = vLine[1];
-    UN.permissions = stoi(vLine[2]);
 
     return UN;
 }
@@ -548,8 +560,24 @@ enTransactionsMenue GetTransactionOptionByUser()
     enTransactionsMenue option = (enTransactionsMenue)GetValidPositiveIntegerInRange("\nChoose what do you want to do? [1 to 4]: ", 1, 5);
     return option;
 }
-short GivePermissions(string message, enPermissions en_permission)
+short GivePermissions(string message, short featureNumber)
 {
+    short permission = 0;
+    permission &= ~(1 << (featureNumber - 'a'));
+    bool areYouAgreed = AreYouAgreed(message, 'y', 'n');
+
+    if (featureNumber == 0)
+    {
+        if(areYouAgreed)
+            return -1;
+        else    
+            return 0;
+    }    
+    else
+    {
+        permission |= (1 << (featureNumber - 'a'));
+        return permission;
+    }
 }
 void GoBackToMainMenueForClients(vector<CD> vClients, CD cd)
 {
@@ -845,7 +873,6 @@ void PerformMainMenueOptionForUsers(vector<stUN> vUsers, vector<CD> vClients, st
     ShowMainMenueScreenForUsers();
 
     vClients = LoadClientDataFromFileToVector(ClientsFile);
-    vUsers = LoadUserDataFromFileToVector(UsersFile);
 
     switch (GetMainOptionByUserForUsers())
     {
@@ -999,23 +1026,25 @@ void PerformManageUsersMenueScreen(vector<stUN> vUsers, vector<CD> vClients, stU
         PerformMainMenueOptionForUsers(vUsers, vClients, UN, cd);
     }
 }
-short PerformPermission()
+stUserName PerformPermission(stUN UN)
 {
-    if(AreYouAgreed("\nDo you want to give full access? [y/n] ", 'y', 'n'))
-        return -1;
-        
-    short permission = 0;
-    cout << "\nDo you want to give access to:";
+    UN.permissions |= GivePermissions("\nDo you want to give full access? [y/n] ", 0);
 
-    permission += (AreYouAgreed("\nShow Client List? [y/n] ", 'y', 'n')) ? enPermissions::showClients : 0;
-    permission += (AreYouAgreed("\nAdd New Client? [y/n] ", 'y', 'n')) ? enPermissions::addClient : 0;
-    permission += (AreYouAgreed("\nDelete Client? [y/n] ", 'y', 'n')) ? enPermissions::deleteClient : 0;
-    permission += (AreYouAgreed("\nUpdate Client? [y/n] ", 'y', 'n')) ? enPermissions::updateClient : 0;
-    permission += (AreYouAgreed("\nFind Client? [y/n] ", 'y', 'n')) ? enPermissions::findClient : 0;
-    permission += (AreYouAgreed("\nTransactions_U? [y/n] ", 'y', 'n')) ? enPermissions::transactions : 0;
-    permission += (AreYouAgreed("\nManage Users? [y/n] ", 'y', 'n')) ? enPermissions::manageUsers : 0;
-    
-    return permission;
+    if (UN.permissions == -1)
+        return UN;
+
+    cout << "\nDo you want to give full access to:\n";
+    UN.permissions |= GivePermissions("\nShow Client List? [y/n] ", 1);
+    UN.permissions |= GivePermissions("\nAdd New Client? [y/n] ", 2);
+    UN.permissions |= GivePermissions("\nDelete Client? [y/n] ", 3);
+    UN.permissions |= GivePermissions("\nUpdate Client? [y/n] ", 4);
+
+    UN.permissions |= GivePermissions("\nFind Client? [y/n] ", 5);
+
+    UN.permissions |= GivePermissions("\nTransactions_U? [y/n] ", 6);
+    UN.permissions |= GivePermissions("\nManage Users? [y/n] ", 7);
+
+    return UN;
 }
 void PerformShowClientList(vector<CD> vClients)
 {
@@ -1272,7 +1301,7 @@ void SaveUserDataToFileForDelete(string UsersFile, vector<stUN> &vUsers)
         }
     }
 }
-void SaveClientsUpdateToFile(string ClientsFile, vector<CD> &vClients, string accountNumber)
+void SaveCleintsUpdateToFile(string ClientsFile, vector<CD> &vClients, string accountNumber)
 {
     fstream myFile;
     myFile.open(ClientsFile, ios::out);
@@ -1611,7 +1640,7 @@ void UpdateClientByAccountNumber(vector<CD> &vClients)
         if (AreYouAgreed("\nAre you sure you want to make this transaction? [Y/N]: ", 'y', 'n'))
         {
             MarkClientForUpdateByAccountNumber(vClients, accountNumber);
-            SaveClientsUpdateToFile(ClientsFile, vClients, accountNumber);
+            SaveCleintsUpdateToFile(ClientsFile, vClients, accountNumber);
 
             //~ Refresh Clients
             vClients = LoadClientDataFromFileToVector(ClientsFile);
