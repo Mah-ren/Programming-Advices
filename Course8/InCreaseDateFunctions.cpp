@@ -10,33 +10,31 @@ struct stDate
 	short day = 1;
 };
 
-int GetDifferenceInDays(stDate, stDate);
-string ConvertTotalDaysToDate(int, int);
+short GetDifferenceInDays(stDate, stDate);
+string ConvertTotalDaysToDate(short, short);
 
-int DaysFromBeggingOfYear(stDate);
-short DaysInCurrentMonth(stDate Date, short month);
-
+short DaysFromBeggingOfYear(stDate);
 stDate GetSystemDate();
-int GetValidPositiveIntegerInRange(string message, int min, int max);
+short GetValidPositiveIntegerInRange(string message, short min, short max);
 
 stDate IncreaseDateByOneDay(stDate Date);
-stDate IncreaseDateByXDays(stDate Date, int);
+stDate IncreaseDateByXDays(stDate Date, short);
 stDate IncreaseDateByOneWeek(stDate Date);
-stDate IncreaseDateByXWeeks(stDate Date, int);
+stDate IncreaseDateByXWeeks(stDate Date, short);
 stDate IncreaseDateByOneMonth(stDate Date);
-stDate IncreaseDateByXMonths(stDate Date, int);
+stDate IncreaseDateByXMonths(stDate Date, short);
 stDate IncreaseDateByOneYear(stDate Date);
-stDate IncreaseDateByXYears(stDate Date, int);
+stDate IncreaseDateByXYears(stDate Date, short);
 stDate IncreaseDateByOneDecade(stDate Date);
-stDate IncreaseDateByXDecades(stDate Date, int);
+stDate IncreaseDateByXDecades(stDate Date, short);
 stDate IncreaseDateByOneCentury(stDate Date);
-stDate IncreaseDateByXCenturies(stDate Date, int);
+stDate IncreaseDateByXCenturies(stDate Date, short);
 bool IsLastMonthInYear(short month);
 bool IsLastDayInMonth(stDate Date);
-bool isLeapYear(int);
-
-int NumberOfDaysInAYear(int year);
-int DaysInCurrentMonthInNotLeapYear(stDate);
+bool isLeapYear(short);
+short NumberOfDaysInAYear(short year);
+short DaysInCurrentMonth(short year, short month);
+short DaysInCurrentMonthInNotLeapYear(short month);
 
 stDate ReadDateInfo();
 
@@ -47,7 +45,7 @@ int main()
 	cout << "\nPlease Enter Your Date Of Birth:\n";
 	Date = ReadDateInfo();
 
-	int daysFromBeggingOfYear = DaysFromBeggingOfYear(Date);
+	short daysFromBeggingOfYear = DaysFromBeggingOfYear(Date);
 
 	cout << "\nDate After: ";
 
@@ -96,11 +94,11 @@ int main()
 	cout << "\n12] Adding ten centuries is: " << Date.month << "/" << Date.day << "/" << Date.year;
 }
 
-int DaysFromBeggingOfYear(stDate Date)
+short DaysFromBeggingOfYear(stDate Date)
 {
-	int numberOfDaysInAMonth = 0;
+	short numberOfDaysInAMonth = 0;
 
-	for (int i = 1; i < Date.month; i++)
+	for (short i = 1; i < Date.month; i++)
 	{
 		numberOfDaysInAMonth += DaysInCurrentMonth(Date, i);
 	}
@@ -108,26 +106,26 @@ int DaysFromBeggingOfYear(stDate Date)
 	return numberOfDaysInAMonth += Date.day;
 }
 
-bool isLeapYear(int year)
+bool isLeapYear(short year)
 {
 	return (year % 4 == 0 && year % 100 != 0) || (year % 400 == 0);
 }
 
-int NumberOfDaysInAYear(int year)
+short NumberOfDaysInAYear(short year)
 {
 	return isLeapYear(year) ? 366 : 365;
 }
 
-int DaysInCurrentMonthInNotLeapYear(stDate Date)
+short DaysInCurrentMonthInNotLeapYear(short month)
 {
-	int array[] = {1, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+	short array[] = {1, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 
-	return array[Date.month];
+	return array[month];
 }
 
-short DaysInCurrentMonth(stDate Date, short month)
+short DaysInCurrentMonth(short year, short month)
 {
-	return ((isLeapYear(Date.year) && month == 2) ? 29 : DaysInCurrentMonthInNotLeapYear(Date));
+	return ((isLeapYear(year) && month == 2) ? 29 : DaysInCurrentMonthInNotLeapYear(month));
 }
 
 stDate IncreaseDateByOneDay(stDate Date)
@@ -151,26 +149,26 @@ stDate IncreaseDateByOneDay(stDate Date)
 	return Date;
 }
 
-stDate IncreaseDateByXDays(stDate Date, int daysToAdd)
+stDate IncreaseDateByXDays(stDate Date, short daysToAdd)
 {
-	for(int i = 0; i < daysToAdd; ++i)
+	for(short i = 0; i < daysToAdd; ++i)
 		Date = IncreaseDateByOneDay(Date);
 	
 	return Date;
 }
 bool IsLastDayInMonth(stDate Date)
 {
-	return Date.day == DaysInCurrentMonth(Date, Date.month) ? true : false;
+	return Date.day == DaysInCurrentMonth(Date.year, Date.month) ? true : false;
 }
 stDate IncreaseDateByOneWeek(stDate Date)
 {
-	for(int i = 0; i < 7; ++i)
+	for(short i = 0; i < 7; ++i)
 		Date = IncreaseDateByOneDay(Date);
 	return Date;
 }
-stDate IncreaseDateByXWeeks(stDate Date, int weeksToAdd)
+stDate IncreaseDateByXWeeks(stDate Date, short weeksToAdd)
 {
-	for (int i = 0; i < weeksToAdd; ++i)
+	for (short i = 0; i < weeksToAdd; ++i)
 		Date = IncreaseDateByOneWeek(Date);
 	return Date;
 }
@@ -183,14 +181,14 @@ stDate IncreaseDateByOneMonth(stDate Date)
 	}
 	else 
 		Date.month++;
-	short daysInCurrentMonth = DaysInCurrentMonth(Date, Date.month);
+	short daysInCurrentMonth = DaysInCurrentMonth(Date.year, Date.month);
 	if(Date.day > daysInCurrentMonth)
 		Date.day = daysInCurrentMonth;
 	return Date;
 }
-stDate IncreaseDateByXMonths(stDate Date, int monthsToAdd)
+stDate IncreaseDateByXMonths(stDate Date, short monthsToAdd)
 {
-	for (int i = 0; i < monthsToAdd; ++i)
+	for (short i = 0; i < monthsToAdd; ++i)
 		Date = IncreaseDateByOneMonth(Date);
 	return Date;
 }
@@ -199,7 +197,7 @@ stDate IncreaseDateByOneYear(stDate Date)
 	Date.year++;
 	return Date;
 }
-stDate IncreaseDateByXYears(stDate Date, int yearsToAdd)
+stDate IncreaseDateByXYears(stDate Date, short yearsToAdd)
 {
 	Date.year += yearsToAdd;
 	return Date;
@@ -209,7 +207,7 @@ stDate IncreaseDateByOneDecade(stDate Date)
 	Date.year += 10;
 	return Date;
 }
-stDate IncreaseDateByXDecades(stDate Date, int decadesToAdd)
+stDate IncreaseDateByXDecades(stDate Date, short decadesToAdd)
 {
 	Date.year += (10 * decadesToAdd); 
 	return Date;
@@ -219,25 +217,25 @@ stDate IncreaseDateByOneCentury(stDate Date)
 	Date.year += 100;
 	return Date;
 }
-stDate IncreaseDateByXCenturies(stDate Date, int centuriesToAdd)
+stDate IncreaseDateByXCenturies(stDate Date, short centuriesToAdd)
 {
 	Date.year += (100 * centuriesToAdd);
 	return Date;
 }
-int GetValidPositiveIntegerInRange(string message, int min, int max)
+short GetValidPositiveIntegerInRange(string message, short min, short max)
 {
-	int number = 1;
+	short number = 1;
 
 	do
 	{
 		cout << message;
 		cin >> number;
 
-		if (cin.fail()) // Check if extraction failed (non-integer input)
+		if (cin.fail()) // Check if extraction failed (non-shorteger input)
 		{
 			cin.clear();										 // Clear the error flag
 			cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Ignore invalid input
-			cout << "\nInvalid input. Please enter a positive integer." << endl;
+			cout << "\nInvalid input. Please enter a positive shorteger." << endl;
 			continue; // Prompt user again
 		}
 
@@ -263,5 +261,5 @@ bool IsLastMonthInYear(short month)
 }
 bool isLastDayInMonth(stDate Date)
 {
-	return (Date.day == DaysInCurrentMonth(Date, Date.month)) ? true : false;
+	return (Date.day == DaysInCurrentMonth(Date.year, Date.month)) ? true : false;
 }

@@ -1004,17 +1004,16 @@ short PerformPermission()
     if(AreYouAgreed("\nDo you want to give full access? [y/n] ", 'y', 'n'))
         return -1;
         
-    short permission = 0;
+    short permission = 0, number = 1;
     cout << "\nDo you want to give access to:";
-
-    permission += (AreYouAgreed("\nShow Client List? [y/n] ", 'y', 'n')) ? enPermissions::showClients : 0;
-    permission += (AreYouAgreed("\nAdd New Client? [y/n] ", 'y', 'n')) ? enPermissions::addClient : 0;
-    permission += (AreYouAgreed("\nDelete Client? [y/n] ", 'y', 'n')) ? enPermissions::deleteClient : 0;
-    permission += (AreYouAgreed("\nUpdate Client? [y/n] ", 'y', 'n')) ? enPermissions::updateClient : 0;
-    permission += (AreYouAgreed("\nFind Client? [y/n] ", 'y', 'n')) ? enPermissions::findClient : 0;
-    permission += (AreYouAgreed("\nTransactions_U? [y/n] ", 'y', 'n')) ? enPermissions::transactions : 0;
-    permission += (AreYouAgreed("\nManage Users? [y/n] ", 'y', 'n')) ? enPermissions::manageUsers : 0;
     
+    vector<string> Features = {"\nShow Client List? [y/n] ", "\nAdd New Client? [y/n] ", "\nDelete Client? [y/n] ", "\nUpdate Client? [y/n] ", "\nFind Client? [y/n] ", "\nTransactions_U? [y/n] ", "\nManage Users? [y/n] "};
+    for(string &feature : Features)
+    {
+        permission += (AreYouAgreed(feature, 'y', 'n')) ? number : 0;
+        number *= 2;
+    }
+
     return permission;
 }
 void PerformShowClientList(vector<CD> vClients)
