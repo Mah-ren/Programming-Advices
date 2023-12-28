@@ -1,6 +1,7 @@
 #include <iostream>
 #include <limits>
 #include <vector>
+#include <cmath>
 using namespace std;
 
 enum enWeekDays
@@ -22,9 +23,9 @@ struct stDate
 
 bool AreYouAgreed(string message, char agreed, char notAgreed);
 
-short CalcVacationPeriods(stDate Date, stDate Date2, short vacationDays);
+short CalcVacationPeriods(stDate Date, stDate Date2);
+short ConvertToPosition(short decimalNumber);
 
-short DaysFromBeginngOfYear(stDate Date);
 short DaysInCurrentMonthInNotLeapYear(short month);
 short DaysInCurrentMonth(short year, short month);
 short DayOfWeekOrder(short, short, short);
@@ -34,18 +35,20 @@ short DaysUntilEndOfWeek(short dayOfWeekOrder);
 short DaysUntilEndOfYear(short numberOfDaysInAYear, short daysFromBeginngOfYear);
 short DaysUntilEndOfMonth(stDate);
 
-
 short GetDifferenceInDays(stDate Date, stDate Date2);
-short GetVacationDays();
+short GetWeekendDaysFromUser();
 short GetValidPositiveIntegerInRange(string message, short min, short max);
 
 stDate IncreaseDateByOneDay(stDate Date);
+void IncrementMonthAndYear(stDate &Date);
+bool isDate1BeforeDate2(stDate Date1, stDate Date2);
+bool isItBusinessDay(short dayOfWeekOrder);
+bool isItEndOfWeek(short );
 bool IsLastDayInMonth(stDate Date);
 bool IsLastMonthInYear(short month);
 bool isLeapYear(short year);
-bool isItBusinessDay(short dayOfWeekOrder);
-bool isItEndOfWeek(short );
-bool isItWeekend(short);
+bool IsDayWeekend(short, short);
+bool IsFridayOrSaturday(short day);
 
 short NumberOfDaysInAYear(short year);
 
@@ -67,7 +70,7 @@ int main()
     cout << "\nVacation To: " << DayShortName(DayOfWeekOrder(Date2)) << " , " << to_string(Date2.month) << "/" << to_string(Date2.day) << "/" << to_string(Date2.year) ;
 
     
-    cout << "\n\nActual Vacation Days is: " << CalcVacationPeriods(Date1, Date2, GetVacationDays());
+    cout << "\n\nActual Vacation Days is: " << CalcVacationPeriods(Date1, Date2);
 
 }
  
@@ -93,65 +96,36 @@ bool AreYouAgreed(string message, char agreed, char notAgreed)
     return (tolower(choice) == 'y' ? true : false);
 }
 
-short CalcVacationPeriods(stDate Date, stDate Date2, short vacationDays) 
+short CalcVacationPeriods(stDate Date1, stDate Date2) 
 {
     short differenceInDaysExceptWeekends = 0;
-    if(Date.year != Date2.year)
+
+    while(isDate1BeforeDate2(Date1, Date2))
     {
-        short length = Date2.year - Date.year;
-        short year = Date.year;
-        short month = Date.month;
-        short day = Date.day;
+        // if(!IsDayWeekend(weekDays, ConvertToPosition(DayOfWeekOrder(Date1)+1)))
+        //     differenceInDaysExceptWeekends++;
+        if(!IsFridayOrSaturday(DayOfWeekOrder(Date1)))
+            differenceInDaysExceptWeekends++;
 
-        for(short i = 0; i < length; ++i)
-        { //! عاوز اعمل لكل سنة فنكشن 
-            for(short j = 0; j < NumberOfDaysInAYear(year); ++j)
-            {
-                short dayOfWeekOrder = DayOfWeekOrder(day, month, year);
-                
-                if (!isItWeekend(dayOfWeekOrder))
-                    differenceInDaysExceptWeekends++;
-
-                if (day == DaysInCurrentMonth(year, month))
-                    month++;
-                day++;
-
-                
-            }
-            year++;
-        }
-
-//! لو مش نفس السنوات يبقى هنعمل فور لووب بعدد ايام السنة يعني لو السنة 365 يبقى هفضل اسأل 365 مرة و اقول هل هذا اليوم 
-//! if (! (dayOfWeekOrder == 5 || dayOfWeekOrder == 6)) يعني هل هذا اليوم يوم الجمعة او السبت لو نعم يبقى 
-//! لو يوم غير الجمعة و السبت يبقى 
-//*  differenceInDaysExceptWeekends++;
-//! so i'll make a for loop عشان تلف بعدد السنوات يعني لو الفرق بينهم اربع سنوات يبقى 
-//! for(short i = 0; i < (Date2.year - Date2.year); ++i)
-//! {
-//!     داخل هذا اللوب هعمل لووب اخر عشان will repeat as many as the number of days in this year 
-//! so for(short = 0; i < )
-}       
-
-
-        for (short yearOfDate = (Date.year + 1); yearOfDate < Date2.year; ++yearOfDate)
-            differenceInDaysExceptWeekends += NumberOfDaysInAYear(yearOfDate);
-        
-        differenceInDaysExceptWeekends += ((NumberOfDaysInAYear(Date.year) - DaysFromBeginngOfYear(Date)) + DaysFromBeginngOfYear(Date2));
+        Date1 = IncreaseDateByOneDay(Date1);    
     }
-    else    
-        differenceInDaysExceptWeekends += (DaysFromBeginngOfYear(Date2) - DaysFromBeginngOfYear(Date));
-	return differenceInDaysExceptWeekends;
+    
+    return differenceInDaysExceptWeekends;
+}       
+short ConvertToPosition(short decimalNumber)
+{
+    return 1 << (decimalNumber - 1);
 }
 
 short DaysFromBeginngOfYear(stDate Date)
 {
-    short numberOfDaysInAMonth = 0;
+    short daysInCurrentMonth = 0;
 
 	for (short i = 1; i < Date.month; i++)
 	{
-		numberOfDaysInAMonth += DaysInCurrentMonth(Date.year, i);
+		daysInCurrentMonth += DaysInCurrentMonth(Date.year, i);
 	}
-	return numberOfDaysInAMonth += Date.day;
+	return daysInCurrentMonth += Date.day;
 }
 short DaysInCurrentMonthInNotLeapYear(short month)
 {
@@ -193,7 +167,7 @@ short DaysUntilEndOfYear(short numberOfDaysInAYear, short daysFromBeginngOfYear)
     return (numberOfDaysInAYear - daysFromBeginngOfYear);
 }
 
-short GetWeekendsFromUser()
+short GetWeekendDaysFromUser()
 {
     cout << "\nPlease enter the Weekend days (y/n) for each day:\n";      
     vector<string> weekDays = { "Sunday: ", "Monday: ", "Tuesday: ", "Wednesday: ", "Thursday: ", "Friday: ", "Saturday: "};
@@ -202,7 +176,7 @@ short GetWeekendsFromUser()
 
     for(string &day : weekDays)
     {
-        vacationDays += (AreYouAgreed(day, 'y', 'n')) ? number : 0;
+        vacationDays += AreYouAgreed(day, 'y', 'n') ? number : 0;
         number *= 2;
     }
 
@@ -243,54 +217,69 @@ short GetValidPositiveIntegerInRange(string message, short min, short max)
 
     return number;
 }
-
 stDate IncreaseDateByOneDay(stDate Date)
 {
-	if (IsLastDayInMonth(Date))
-	{
-		if (IsLastMonthInYear(Date.month))
-		{
-			++Date.year;
-			Date.month = 1;
-			Date.day = 1;
-		}
-		else
-		{
-			Date.day = 1;
-			++Date.month;
-		}
-	}
-	else
-		Date.day++;
-	return Date;
+    if (IsLastDayInMonth(Date))
+    {
+        IncrementMonthAndYear(Date);
+    }
+    else
+    {
+        ++Date.day;
+    }
+    return Date;
+}
+void IncrementMonthAndYear(stDate &Date)
+{
+    if (IsLastMonthInYear(Date.month))
+    {
+        ++Date.year;
+        Date.month = 1;
+        Date.day = 1;
+    }
+    else
+    {
+        Date.day = 1;
+        ++Date.month;
+    }
+}
+bool isDate1BeforeDate2(stDate Date1, stDate Date2)
+{
+    if((Date1.year < Date2.year) || (Date1.month < Date2.month) || (Date1.day < Date2.day))
+        return true;
+    return false;
 }
 bool IsLastDayInMonth(stDate Date)
 {
-	return Date.day == DaysInCurrentMonth(Date.year, Date.month) ? true : false;
+	return (Date.day == DaysInCurrentMonth(Date.year, Date.month));
 }
 bool IsLastMonthInYear(short month)
 {
-	return (month == 12) ? true : false;
+	return (month == 12);
 }
 bool isItEndOfWeek(short dayOfWeekOrder)
 {
-    return (dayOfWeekOrder == 6) ? true : false;
-}
-bool isItWeekend(short dayOfWeekOrder)
-{
-    return (dayOfWeekOrder == 6 || dayOfWeekOrder == 5) ? true : false;
+    return (dayOfWeekOrder == 6);
 }
 bool isItBusinessDay(short dayOfWeekOrder)
 {
-    return !(dayOfWeekOrder == 6 || dayOfWeekOrder == 5) ? true : false;
+    return !(dayOfWeekOrder == 6 || dayOfWeekOrder == 5);
 }
 bool isLeapYear(short year)
 {
     return (year % 4 == 0 && year % 100 != 0) || (year % 400 == 0);
 }
-bool IsWeekend(short vacationdDays, enWeekDays day)
+boolisDate1BeforeDate2(stDate Date1, stDate Date2)
 {
-    return ((vacationdDays & day) != 0) ? true : false;
+    return (Date1.year == Date2.year && Date1.month == Date2.month && Date1.day == Date2.day) ? true : false;
+}
+bool IsDayWeekend(short WeekendDays, short day)
+{
+    return ((WeekendDays & day) != 0);
+}
+bool IsFridayOrSaturday(short day)
+{
+    return (day == 5 || day == 6);
 }
 
 short NumberOfDaysInAYear(short year)

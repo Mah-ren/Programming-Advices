@@ -43,6 +43,7 @@ int NumberOfDaysInAYear(int year);
 int DaysInCurrentMonthInNotLeapYear(stDate);
 
 stDate ReadDateInfo();
+void SwapDates(stDate &Date1, stDate &Date2);
 
 int main()
 {
@@ -131,75 +132,6 @@ int DaysInCurrentMonth(stDate Date, short month)
 	return ((isLeapYear(Date.year) && month == 2) ? 29 : DaysInCurrentMonthInNotLeapYear(Date));
 }
 
-stDate IncreaseDateByOneDay(stDate Date)
-{
-	if (IsLastDayInMonth(Date))
-	{
-		if (IsLastMonthInYear(Date.month))
-		{
-			++Date.year;
-			Date.month = 1;
-			Date.day = 1;
-		}
-		else
-		{
-			Date.day = 1;
-			++Date.month;
-		}
-	}
-	else
-		Date.day++;
-	return Date;
-}
-
-stDate IncreaseDateByXDays(stDate Date, int daysToAdd)
-{
-	for(short i = 0; i < daysToAdd; ++i)
-	{
-		Date = IncreaseDateByOneDay(Date);
-	}
-
-	int remainingDays = daysToAdd;
-	short daysRemainingInMonth = 1;
-	short daysRemainingInYear = (NumberOfDaysInAYear(Date.year) - daysFromBeginningOfYear);
-	short numberOfDaysInYear = 1;
-
-	if (remainingDays > daysRemainingInYear)
-	{
-		remainingDays -= daysRemainingInYear;
-		Date.year++;
-		Date.month = 1;
-		Date.day = 1;
-	}
-
-	while (true)
-	{
-		short numberOfDaysInYear = NumberOfDaysInAYear(Date.year);
-		
-		if (remainingDays > numberOfDaysInYear)
-		{
-			remainingDays -= numberOfDaysInYear;
-			Date.year++;
-		}
-		else
-		{
-			daysRemainingInMonth = (DaysInCurrentMonth(Date, Date.month) - Date.day);
-			
-			if (remainingDays > daysRemainingInMonth)
-			{
-				remainingDays -= daysRemainingInMonth;
-				++Date.month;
-			}
-			else
-			{
-				Date.day = remainingDays;
-				break;
-			}
-		}
-	}
-
-	return Date;
-}
 bool IsLastDayInMonth(stDate Date)
 {
 	return Date.day == DaysInCurrentMonth(Date, Date.month) ? true : false;
@@ -293,9 +225,7 @@ stDate GetSystemDate()
 int GetDifferenceInDays(stDate Date, stDate Date2)
 {
 	if(!isDate1BeforeDate(Date, Date2))
-	{
 	    SwapDates(Date, Date2);
-	}
 
 	int differenceInDays = 0;
 	for (int yearOfDate = (Date.year + 1); yearOfDate < Date2.year; ++yearOfDate)
@@ -316,6 +246,23 @@ stDate ReadDateInfo()
 	return Date;
 }
  
+void SwapDates(stDate &Date1, stDate &Date2)
+{
+    stDate Temp;
+
+    Temp.year = Date1.year;
+    Temp.month = Date1.month;
+    Temp.day = Date1.day;
+
+    Date1.year = Date2.year;
+    Date1.month = Date2.month;
+    Date1.day = Date2.day;
+
+    Date2.year = Temp.year;
+    Date2.month = Temp.month;
+    Date2.day = Temp.day;
+}
+
 bool IsLastMonthInYear(short month)
 {
 	return (month == 12) ? true : false;

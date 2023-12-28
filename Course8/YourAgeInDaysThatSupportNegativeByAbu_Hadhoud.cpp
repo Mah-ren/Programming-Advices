@@ -14,22 +14,21 @@ struct stDate
 	int day = 1;
 };
 
-int GetDifferenceInDays(stDate, stDate);
-string ConvertTotalDaysToDate(int, int);
-
 int DaysFromBeggingOfYear(stDate);
+int DaysInCurrentYear(int year);
 
+int GetDifferenceInDays(stDate, stDate);
 stDate GetSystemDate();
 int GetValidPositiveIntegerInRange(string message, int min, int max);
 
 bool isDate1BeforeDate2(stDate Date1, stDate Date2);
 bool isLeapYear(int);
 
-int NumberOfDaysInAYear(int year);
 int NumberOfDaysInMonth(stDate);
 int NumberOfDaysInMonthInNotLeapYear(stDate);
 
 stDate ReadDateInfo();
+
 void SwapDates(stDate &Date1, stDate &Date2);
 
 int main()
@@ -42,7 +41,7 @@ int main()
 
 	cout << "\nYour Age In Days is: " << GetDifferenceInDays(Date1, Date2);
 }
-
+ 
 int DaysFromBeggingOfYear(stDate Date)
 {
 	int numberOfDaysInAMonth = 0;
@@ -53,16 +52,20 @@ int DaysFromBeggingOfYear(stDate Date)
 	}
 	return numberOfDaysInAMonth += Date.day;
 }
+short DaysInCurrentMonth(short year, short month)
+{
+    return ((isLeapYear(year) && month == 2) ? 29 : DaysInCurrentMonthInNotLeapYear(month));
+}
+int DaysInCurrentYear(int year)
+{
+	return isLeapYear(year) ? 366 : 365;
+}
 
 bool isLeapYear(int year)
 {
 	return(year % 4 == 0 && year % 100 != 0) || (year % 400 == 0);
 }
 
-int NumberOfDaysInAYear(int year)
-{
-	return isLeapYear(year) ? 366 : 365;
-}
 
 int NumberOfDaysInMonthInNotLeapYear(stDate Date)
 {
@@ -76,29 +79,6 @@ int NumberOfDaysInMonth(stDate Date)
 	return((isLeapYear(Date.year) && Date.month == 2) ? 29 : NumberOfDaysInMonthInNotLeapYear(Date));
 }
 
-string ConvertTotalDaysToDate(int year, int daysFromBeggingOfYear)
-{
-	stDate Date;
-	Date.year = year;
-	Date.month = 1;
-	int remainingDays = daysFromBeggingOfYear;
-	int numberOfDaysInMonth = 1;
-	while (true)
-	{
-		numberOfDaysInMonth = NumberOfDaysInMonth(Date);
-		if (remainingDays > numberOfDaysInMonth)
-		{
-			remainingDays -= numberOfDaysInMonth;
-			++Date.month;
-		}
-		else
-		{
-			Date.day = remainingDays;
-			break;
-		}
-	}
-
-	return to_string(Date.month) + "/" + to_string(Date.day) + "/" + to_string(Date.year);
 }
 
 int GetValidPositiveIntegerInRange(string message, int min, int max)
@@ -139,17 +119,52 @@ stDate GetSystemDate()
 
 int GetDifferenceInDays(stDate Date1, stDate Date2)
 {
-    // if(!isDate1BeforeDate2(Date1, Date2))
-    // {
-    //     SwapDates(Date1, Date2);
-    // }
+    if(!isDate1BeforeDate2(Date1, Date2))
+    {
+        SwapDates(Date1, Date2);
+    }
 
 	int differenceInDays = 0;
 	for(int yearOfDate1 = (Date1.year + 1); yearOfDate1 < Date2.year; ++yearOfDate1)
-		differenceInDays += NumberOfDaysInAYear(yearOfDate1);
-	differenceInDays += ((NumberOfDaysInAYear(Date1.year) - DaysFromBeggingOfYear(Date1)) + DaysFromBeggingOfYear(Date2));
+		differenceInDays += DaysInCurrentYear(yearOfDate1);
+	differenceInDays += ((DaysInCurrentYear(Date1.year) - DaysFromBeggingOfYear(Date1)) + DaysFromBeggingOfYear(Date2));
 
 	return differenceInDays;
+}
+
+bool IsLastDayInMonth(stDate Date)
+{
+	return (Date.day == DaysInCurrentMonth(Date.year, Date.month));
+}
+bool IsLastMonthInYear(short month)
+{
+	return (month == 12);
+}
+stDate IncreaseDateByOneDay(stDate Date)
+{
+    if (IsLastDayInMonth(Date))
+    {
+        IncrementMonthAndYear(Date);
+    }
+    else
+    {
+        ++Date.day;
+    }
+    return Date;
+}
+void IncrementMonthAndYear(stDate &Date)
+{
+    if (IsLastMonthInYear(Date.month))
+    {
+        ++Date.year;
+        Date.month = 1;
+        Date.day = 1;
+    }
+    else
+    {
+        Date.day = 1;
+        ++Date.month;
+    }
 }
 
 bool isDate1BeforeDate2(stDate Date1, stDate Date2)
