@@ -24,6 +24,8 @@ private:
 public:
     classAddress(string building, string street, string poBox, string zipCode, string country, string government)
     {
+        cout << "\nHi i'm the constructor.";
+
         _building = building;
         _street   = street;
         _poBox    = poBox;
@@ -81,6 +83,7 @@ void Project()
 
     classAddress Address1("Our House", "Abu Baker El Siedieq", "11192", "0238676460", "Egypt", "Giza");
     classAddress Address2 = Address1;
+
     Address1.PrintAddress();
     Address2.PrintAddress();
     cout << endl;

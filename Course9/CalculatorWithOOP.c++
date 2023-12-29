@@ -29,9 +29,9 @@ public:
     void Add(double number)
     {
         _lastNumber = number;
-        _lastOperation = enOperations::Add;
         _previousResult = _result;
         _result += number;
+        _lastOperation = enOperations::Add;
     }
     void Subtract(double number)
     {
@@ -54,7 +54,6 @@ public:
         if(_isZero(number))
             number = 1;
             
-
         _previousResult = _result;
         _result /= number;
         _lastOperation = enOperations::Division;
@@ -68,8 +67,8 @@ public:
     }
     void CancelLastOperation()   
     { 
-        _lastOperation = enOperations::CancelLastOperation;
         _result = _previousResult;
+        _lastOperation = enOperations::CancelLastOperation;
     }
     int GetFinalResult()
     {
@@ -137,7 +136,6 @@ int main()
 
     Calculator.GetFinalResult();
     Calculator.PrintResult();
-
 
     system("pause>0");
     return 0;
