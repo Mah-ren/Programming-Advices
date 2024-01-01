@@ -17,7 +17,7 @@ short CountEachWordInString(string str)
 {
     short position = 0 , count = 0 ; 
     string delimeter = " " , word;
-
+    
     while((position = str.find(delimeter)) != str.npos)
     {
         word = str.substr(0 , position);

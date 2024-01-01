@@ -5,8 +5,9 @@
 #include <string>
 #include <vector>
 #include <limits>
+#include "ReadFromUser.h";
 using namespace std;
-string fileName = "Bank1WithExtension.txt";
+string fileName = "Clients.txt";
 
 enum enMainMenue
 {
@@ -56,8 +57,6 @@ bool FindClientByAccountNumber(vector<CD> vClients, string accountNumber);
 enMainMenue GetMainOptionByUser();
 string GetStringInput(string prompt);
 enTransactionsMenue GetTransactionOptionByUser();
-int GetValidPositiveIntegerInRange(string message, short min, short max);
-short GetValidPositiveShortIntegerInRange(string, short, short);
 void GoBackToMainMenue(vector<CD> vClients);
 void GoBackToTransactionsMenue(vector<CD> vClients);
 
@@ -239,48 +238,6 @@ bool FindClientByAccountNumber(vector<CD> vClients, CD &cd, string accountNumber
     return false;
 }
 
-int GetValidPositiveIntegerInRange(string message, short min, short max)
-{
-    int number = 1;
-
-    do
-    {
-        cout << message;
-        cin >> number;
-
-        if (cin.fail()) // Check if extraction failed (non-integer input)
-        {
-            cin.clear();                                         // Clear the error flag
-            cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Ignore invalid input
-            cout << "\nInvalid input. Please enter a positive integer." << endl;
-            continue; // Prompt user again
-        }
-
-    } while (number < min && number > max);
-
-    return number;
-}
-short GetValidPositiveShortIntegerInRange(string message, short min, short max)
-{
-    short number = 1;
-
-    do
-    {
-        cout << message;
-        cin >> number;
-
-        if (cin.fail()) // Check if extraction failed (non-integer input)
-        {
-            cin.clear();                                         // Clear the error flag
-            cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Ignore invalid input
-            cout << "\nInvalid input. Please enter a positive integer." << endl;
-            continue; // Prompt user again
-        }
-
-    } while (number < min && number > max);
-
-    return number;
-}
 string GetStringInput(string prompt)
 {
     string str;
@@ -292,12 +249,12 @@ string GetStringInput(string prompt)
 }
 enMainMenue GetMainOptionByUser()
 {
-    enMainMenue userChoose = (enMainMenue)GetValidPositiveShortIntegerInRange("\nChoose what do you want to do? [1 to 7]: ", 1, 7);
+    enMainMenue userChoose = (enMainMenue)ReadFromUser::GetValidPositiveShortegerInRange("\nChoose what do you want to do? [1 to 7]: ", 1, 7);
     return userChoose;
 }
 enTransactionsMenue GetTransactionOptionByUser()
 {
-    enTransactionsMenue userChoose = (enTransactionsMenue)GetValidPositiveShortIntegerInRange("\nChoose what do you want to do? [1 to 4]: ", 1, 5);
+    enTransactionsMenue userChoose = (enTransactionsMenue)ReadFromUser::GetValidPositiveShortegerInRange("\nChoose what do you want to do? [1 to 4]: ", 1, 5);
     return userChoose;
 }
 void GoBackToMainMenue(vector<CD> vClients)
@@ -394,7 +351,7 @@ void PerformDeposit(vector<CD> &vClients)
     {
         cout << "\nThe Following are the client details:\n";
         PrintOneClientDataLongitudinallyAndtransversely(cd, 'l');
-        short depositAmount = GetValidPositiveIntegerInRange("\n\nPlease Enter Deposit Amount: ", 1, 32000);
+        short depositAmount = ReadFromUser::GetValidPositiveShortegerInRange("\n\nPlease Enter Deposit Amount: ", 1, 32000);
         if(ShowAreYouSure())
         {
             for(CD &c : vClients)
@@ -552,7 +509,7 @@ void PerformWithdraw(vector<CD> &vClients)
     if(FindClientByAccountNumber(vClients, cd, accountNumber))
     {
         PrintOneClientDataLongitudinallyAndtransversely(cd, 'l');
-        short withdraw = GetValidPositiveIntegerInRange("\nPlease Enter Withdraw Amount: ", 1, 60000);
+        short withdraw = ReadFromUser::GetValidPositiveShortegerInRange("\nPlease Enter Withdraw Amount: ", 1, 60000);
         if(ShowAreYouSure())
         {
             for(CD &c : vClients)
