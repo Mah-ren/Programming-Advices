@@ -6,6 +6,7 @@ int main()
 {
     string S1 = "Mahmoud Ahmed Abdel aal Ahmed";
     cout << "\nThe Length of the String : " << S1.length(); 
+    
     cout << "\nThis is the first index with .at(index): " << S1.at(0) ;
     cout << "\nThis is the first index like an array : " << S1[0] ;
     S1.append("Abo Hamad");

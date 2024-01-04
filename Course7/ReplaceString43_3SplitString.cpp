@@ -6,7 +6,6 @@
 using namespace std ;
  
 string ConvertingStringToUpper(string); 
-void SetScreenColor(bool , string , string );
 vector<string> replaceTwoWords(vector<string> &vString , string , string , bool);
 bool isWordFoundInVector(vector<string> &vString , string , bool);
 string JoinString(vector<string> &vNames , string delimiter = " ");
@@ -94,11 +93,13 @@ vector<string> ReplaceTwoWordsInString(string str , string StringToReplace , str
     if(isWordFoundInVector(vString , StringToReplace , CaseSensitive)) 
     {
         vString = replaceTwoWords(vString , StringToReplace , sReplaceTo , CaseSensitive);
-        SetScreenColor(true , "Replacing words done successfuly :-)\n" ,  "No occurrence of the word "+ StringToReplace + " in the string:-(\n"); 
+        cout << "Replacing words done successfuly :-)\n";
+        system("color 0f");
     }
     else 
     {
-        SetScreenColor(false , "Replacing words done successfuly :-)\n" , "No occurrence of the word "+ StringToReplace + " in the string:-(\n" );
+        cout << "No occurrence of the word " << StringToReplace;
+        system("color 0c");
         system("pause");
     }
     return vString;
@@ -149,20 +150,6 @@ vector<string> replaceTwoWords(vector<string> &vString , string StringToReplace 
     }
 
     return vString;
-}
-
-void SetScreenColor(bool rightAnswer  , string messageIfRightAnswer , string messageIfWrongAnswer)
-{
-    if(rightAnswer)    
-    {
-        cout << messageIfRightAnswer;
-        system("color a0");
-    }
-    else 
-    {
-        cout << messageIfWrongAnswer;
-        system("color c0");
-    }
 }
 
 string ConvertingStringToUpper(string str)

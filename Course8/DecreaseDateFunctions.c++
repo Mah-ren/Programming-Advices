@@ -121,6 +121,10 @@ short DaysInCurrentMonth(stDate Date, short month)
     return ((isLeapYear(Date.year) && month == 2) ? 29 : DaysInCurrentMonthInNotLeapYear(Date));
 }
 
+bool IsFirstDayInMonth(stDate Date)
+{
+    return Date.day == DaysInCurrentMonth(Date, Date.month) ? true : false;
+}
 stDate DecreaseDateByOneDay(stDate Date)
 {
     if (Date.day == 1)
@@ -141,17 +145,12 @@ stDate DecreaseDateByOneDay(stDate Date)
         --Date.day;
     return Date;
 }
-
 stDate DecreaseDateByXDays(stDate Date, int daysToSubtract)
 {
     for (int i = 0; i < daysToSubtract; ++i)
         Date = DecreaseDateByOneDay(Date);
 
     return Date;
-}
-bool IsFirstDayInMonth(stDate Date)
-{
-    return Date.day == DaysInCurrentMonth(Date, Date.month) ? true : false;
 }
 stDate DecreaseDateByOneWeek(stDate Date)
 {

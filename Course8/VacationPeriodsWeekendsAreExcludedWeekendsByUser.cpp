@@ -269,7 +269,7 @@ bool isLeapYear(short year)
 {
     return (year % 4 == 0 && year % 100 != 0) || (year % 400 == 0);
 }
-boolisDate1BeforeDate2(stDate Date1, stDate Date2)
+bool isDate1BeforeDate2(stDate Date1, stDate Date2)
 {
     return (Date1.year == Date2.year && Date1.month == Date2.month && Date1.day == Date2.day) ? true : false;
 }

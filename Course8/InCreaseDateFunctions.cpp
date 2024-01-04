@@ -105,6 +105,10 @@ short DaysFromBeggingOfYear(stDate Date)
 	
 	return numberOfDaysInAMonth += Date.day;
 }
+bool IsLastDayInMonth(stDate Date)
+{
+	return Date.day == DaysInCurrentMonth(Date.year, Date.month) ? true : false;
+}
 
 bool isLeapYear(short year)
 {
@@ -155,10 +159,6 @@ stDate IncreaseDateByXDays(stDate Date, short daysToAdd)
 		Date = IncreaseDateByOneDay(Date);
 	
 	return Date;
-}
-bool IsLastDayInMonth(stDate Date)
-{
-	return Date.day == DaysInCurrentMonth(Date.year, Date.month) ? true : false;
 }
 stDate IncreaseDateByOneWeek(stDate Date)
 {

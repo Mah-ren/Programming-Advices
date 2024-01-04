@@ -8,9 +8,9 @@ enum enWeekDays
 {
     Sunday = 1,
     Monday = 2,
-    Tuesday = 4, 
+    Tuesday = 4,
     Wednesday = 8,
-    Thursday = 16, 
+    Thursday = 16,
     Friday = 32,
     Saturday = 64
 };
@@ -36,7 +36,7 @@ short GetValidPositiveIntegerInRange(string message, short min, short max);
 stDate IncreaseDateByOneDay(stDate Date);
 void IncrementMonthAndYear(stDate &Date);
 bool isItBusinessDay(short dayOfWeekOrder);
-bool isItEndOfWeek(short );
+bool isItEndOfWeek(short);
 bool IsLastDayInMonth(stDate Date);
 bool IsLastMonthInYear(short month);
 bool isLeapYear(short year);
@@ -85,11 +85,11 @@ stDate CalcReturnDate(stDate Date, short vacationDays)
 {
     while (vacationDays != 0)
     {
-        if(isItBusinessDay(DayOfWeekOrder(Date)))
+        if (isItBusinessDay(DayOfWeekOrder(Date)))
             vacationDays--;
         Date = IncreaseDateByOneDay(Date);
     }
-    return Date;    
+    return Date;
 }
 
 short DaysInCurrentMonthInNotLeapYear(short month)
@@ -119,7 +119,7 @@ string DayShortName(short dayOfWeekOrder)
     string arrDayNames[] = {"Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"};
     return arrDayNames[dayOfWeekOrder];
 }
- 
+
 short GetValidPositiveIntegerInRange(string message, short min, short max)
 {
     short number = 1;
@@ -169,11 +169,11 @@ void IncrementMonthAndYear(stDate &Date)
 }
 bool IsLastDayInMonth(stDate Date)
 {
-	return (Date.day == DaysInCurrentMonth(Date.year, Date.month));
+    return (Date.day == DaysInCurrentMonth(Date.year, Date.month));
 }
 bool IsLastMonthInYear(short month)
 {
-	return (month == 12);
+    return (month == 12);
 }
 bool isItBusinessDay(short dayOfWeekOrder)
 {
@@ -183,7 +183,7 @@ bool isLeapYear(short year)
 {
     return (year % 4 == 0 && year % 100 != 0) || (year % 400 == 0);
 }
- 
+
 bool IsFridayOrSaturday(short day)
 {
     return (day == 5 || day == 6);
@@ -196,8 +196,7 @@ short NumberOfDaysInAYear(short year)
 
 string PrintDateToday(stDate Date)
 {
-    return ("Today is " + DayShortName(DayOfWeekOrder(Date)) + " , " 
-         + to_string(Date.month) + "/" + to_string(Date.day) + "/" + to_string(Date.year));
+    return ("Today is " + DayShortName(DayOfWeekOrder(Date)) + " , " + to_string(Date.month) + "/" + to_string(Date.day) + "/" + to_string(Date.year));
 }
 
 stDate ReadDateInfo()

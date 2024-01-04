@@ -4,29 +4,23 @@
 using namespace std;
 
 
-string JoinString(string array[3] , short length , string delimiter = " ")
+string JoinString(string array[] , short length , string delimiter = " ")
 {
     
     string str ;
     for(int i = 0 ; i < length ; ++i)
-    {
         str += array[i] + delimiter ;
-    }
 
     return str.substr(0 , str.length()-delimiter.length());
 }
 
 string JoinString(vector<string> &vNames , string delimiter = " ")
 {
-    string str ;
+    string text ;
     
     for(string &element : vNames)
-    {                                   //!    this is by me don't need last line of code 
-        str += element + delimiter ;    //!    if(vNames.empty())
-                                        //!      return str ;
-    }
-
-    return str.substr(0 , str.length()-delimiter.length()) ;
+        text += element + delimiter;
+    return text.substr(0 , text.length()-delimiter.length()) ;
 }
 
 void Project()

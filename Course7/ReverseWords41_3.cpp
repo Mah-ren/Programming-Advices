@@ -1,3 +1,4 @@
+
 //! this is by me making newString
 
 #include <iostream>
