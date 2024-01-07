@@ -40,22 +40,22 @@ private:
     string _FirstName;
     string _LastName;
 
-public: // Property Get, this is a read only property because we don’t have a set function
+public: // Property Get, this is a read only property because we don’t have a  function
 
     int ID()
     {
         return _ID;
-    } // Property Set
+    } // Property 
 
-    void setFirstName(string FirstName)
+    void FirstName(string FirstName)
     {
         _FirstName = FirstName;
     } // Property Get
     string FirstName()
     {
         return _FirstName;
-    } // Property Set
-    void setLastName(string LastName)
+    } // Property 
+    void LastName(string LastName)
     {
         _LastName = LastName;
     } // Property Get
@@ -71,8 +71,8 @@ public: // Property Get, this is a read only property because we don’t have a 
 int main()
 {
     clsPerson Person1;
-    Person1.setFirstName("Mohammed");
-    Person1.setLastName("Abu-Hadhoud");
+    Person1.FirstName("Mohammed");
+    Person1.LastName("Abu-Hadhoud");
      
 
     cout << "ID:" << Person1.ID() << endl;
