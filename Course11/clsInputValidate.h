@@ -86,7 +86,7 @@ public:
 		return Number;
 	}
 
-	static double ReadFloatNumber(string ErrorMessage = "Invalid Number, Enter again\n")
+	static float ReadFloatNumber(string ErrorMessage = "Invalid Number, Enter again\n")
 	{
 		float Number;
 		while (!(cin >> Number)) {
@@ -97,7 +97,7 @@ public:
 		return Number;
 	}
 
-	static double ReadFloatNumberBetween(double From, double To, string ErrorMessage = "Number is not within range, Enter again:\n")
+	static float ReadFloatNumberBetween(float From, float To, string ErrorMessage = "Number is not within range, Enter again:\n")
 	{
 		float Number = ReadFloatNumber();
 
@@ -141,6 +141,26 @@ public:
 		// Usage of std::ws will extract allthe whitespace character
 		getline(cin >> ws, S1);
 		return S1;
+	}
+
+	static bool AreYouSure(string message)
+	{
+		char c = 'c';
+		
+		do
+		{
+			cout << message;
+			cin >> c;
+
+			if (cin.fail()){
+
+				cin.clear();
+				cin.ignore(numeric_limits<streamsize>::max(), '\n');
+				cout << "\nTry Again: ";
+
+			}
+		} while (!tolower(c) == 'y' || !tolower(c) == 'n');
+		return (c == 'y') ? true : false;
 	}
 };
 

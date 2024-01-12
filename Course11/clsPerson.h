@@ -12,6 +12,10 @@ private:
     string _phone;
 
 public:
+    clsPerson()
+    {
+        
+    }
     clsPerson(string firstName, string lastName, string email, string phone)
     {
         _firstName = firstName;
