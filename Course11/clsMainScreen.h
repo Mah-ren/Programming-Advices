@@ -1,24 +1,17 @@
 #pragma once
 #include <iostream>
+#include <iomanip>
 #include "clsScreen.h"
 #include "clsBankClient.h"
 #include "clsInputValidate.h"
 #include "clsClientListScreen.h"
 #include "clsAddNewClient.h"
-#include <iomanip>
-
-
-static void _ShowAddNewClientsScreen();
-static void _ShowDeleteClientScreen();
-static void _ShowUpdateClientScreen();
-static void _ShowFindClientScreen();
-static void _ShowTransactionsMenue();
-static void _ShowManageUsersMenue();
-static void _ShowEndScreen();
-static void ShowMainMenue();
-enum enMainMenueOptions{};
-static void _PerfromMainMenueOption(enMainMenueOptions MainMenueOption);
-
+#include "clsDeleteClient.h"
+#include "clsUpdateClient.h"
+#include "clsFindClient.h"
+#include "clsTransactionScreen.h"
+ 
+ 
 using namespace std;
 
 class clsMainScreen:protected clsScreen
@@ -49,7 +42,6 @@ class clsMainScreen:protected clsScreen
         {
             clsClientListScreen::ShowClientsList();
         }
-       
         
         static void _ShowAddNewClientsScreen()
         {
@@ -57,27 +49,23 @@ class clsMainScreen:protected clsScreen
         }
 
         static void _ShowDeleteClientScreen()
-       {
-           cout << "\nDelete Client Screen Will be here...\n";
-
-       }
+        {
+            clsDeleteClient::ShowDeleteClientScreen();
+        }
 
         static void _ShowUpdateClientScreen()
-       {
-           cout << "\nUpdate Client Screen Will be here...\n";
-
-       }
+        {
+            clsUpdateClient::ShowUpdateClientScreen();
+        }
 
         static void _ShowFindClientScreen()
-       {
-           cout << "\nFind Client Screen Will be here...\n";
-
-       }
+        {
+            clsFindClient::ShowFindClientScreen();
+        }
 
         static void _ShowTransactionsMenue()
        {
-           cout << "\nTransactions Menue Will be here...\n";
-
+            clsTransactionScreen::ShowTransactionMenue();            
        }
 
         static void _ShowManageUsersMenue()
@@ -97,52 +85,44 @@ class clsMainScreen:protected clsScreen
             switch (MainMenueOption)
             {
             case enMainMenueOptions::eListClients:
-            {
                 system("cls");
                 _ShowAllClientsScreen();
                 _GoBackToMainMenue();
-                break;
-            }
+
             case enMainMenueOptions::eAddNewClient:
                 system("cls");
                _ShowAddNewClientsScreen();
                 _GoBackToMainMenue();
-                break;
+
 
             case enMainMenueOptions::eDeleteClient:
                 system("cls");
                 _ShowDeleteClientScreen();
                 _GoBackToMainMenue();
-                break;
 
             case enMainMenueOptions::eUpdateClient:
                 system("cls");
                 _ShowUpdateClientScreen();
                 _GoBackToMainMenue();
-                break;
 
             case enMainMenueOptions::eFindClient:
                 system("cls");
                 _ShowFindClientScreen();
                 _GoBackToMainMenue();
-                break;
 
             case enMainMenueOptions::eShowTransactionsMenue:
                 system("cls");
                 _ShowTransactionsMenue();
-                break;
 
             case enMainMenueOptions::eManageUsers:
                 system("cls");
                 _ShowManageUsersMenue();
-                break;
 
             case enMainMenueOptions::eExit:
                 system("cls");
                 _ShowEndScreen();
                 //Login();
 
-                break;
             }
 
         }

@@ -162,5 +162,14 @@ public:
 		} while (!tolower(c) == 'y' || !tolower(c) == 'n');
 		return (c == 'y') ? true : false;
 	}
+
+	static bool isNumber1BiggerThanNumber2(int num1, int num2)
+	{
+		return num1 > num2;
+	}
+
+
+
+
 };
 

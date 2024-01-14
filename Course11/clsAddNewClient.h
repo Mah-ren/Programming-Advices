@@ -3,12 +3,13 @@
 #include <iostream>
 #include <iomanip>
 #include "clsBankClient.h"
+#include "clsScreen.h"
 #include "clsInputValidate.h"
 using namespace std;
 
 
-
-class clsAddNewClient
+ 
+class clsAddNewClient : protected clsScreen
 {
 private: 
     static void _ReadClientInfo(clsBankClient &Client)
@@ -31,12 +32,29 @@ private:
         cout << "\nEnter Account Balance: ";
         Client.SetAccountBalance(clsInputValidate::ReadFloatNumber());
     }
+    
+    static void _PrintClient(clsBankClient Client)
+    {
+        cout << "\nClient Card:";
+        cout << "\n___________________";
+        cout << "\nFirstName   : " << Client.FirstName();
+        cout << "\nLastName    : " << Client.LastName();
+        cout << "\nFull Name   : " << Client.FullName();
+        cout << "\nEmail       : " << Client.Email();
+        cout << "\nPhone       : " << Client.Phone();
+        cout << "\nAcc. Number : " << Client.AccountNumber();
+        cout << "\nPassword    : " << Client.GetPinCode();
+        cout << "\nBalance     : " << Client.GetAccountBalance();
+        cout << "\n___________________\n";
 
+    }
 
 public:
     static void ShowAddNewClientScreen()
     {
         string AccountNumber = "";
+
+        _DrawScreenHeader("\t  Add New Client Screen");
 
         cout << "\nPlease Enter Account Number: ";
         AccountNumber = clsInputValidate::ReadString();
@@ -52,6 +70,7 @@ public:
 
         clsBankClient::enSaveResults SaveResult;
 
+
         SaveResult = NewClient.Save();
 
         switch (SaveResult)
@@ -59,7 +78,7 @@ public:
         case clsBankClient::enSaveResults::svSucceeded:
         {
             cout << "\nAccount Addeded Successfully :-)\n";
-            NewClient.Print();
+            _PrintClient(NewClient);
             break;
         }
         case clsBankClient::enSaveResults::svFaildEmptyObject:

@@ -128,6 +128,8 @@ private:
         _AddDataLineToFile(_ConverClientObjectToLine(*this));
     }
   
+    
+
 
     void _AddDataLineToFile(string  stDataLine)
     {
@@ -150,12 +152,13 @@ private:
         return clsBankClient(enMode::EmptyMode, "", "", "", "", "", "", 0);
     }
 
+
 public:
 
 
     clsBankClient(enMode Mode, string FirstName, string LastName,
         string Email, string Phone, string AccountNumber, string PinCode,
-        float AccountBalance) :
+        double AccountBalance) :
         clsPerson(FirstName, LastName, Email, Phone)
 
     {
@@ -196,23 +199,6 @@ public:
     {
         return _AccountBalance;
     }
-
-    void Print()
-    {
-        cout << "\nClient Card:";
-        cout << "\n___________________";
-        cout << "\nFirstName   : " << FirstName();
-        cout << "\nLastName    : " << LastName();
-        cout << "\nFull Name   : " << FullName();
-        cout << "\nEmail       : " << Email();
-        cout << "\nPhone       : " << Phone();
-        cout << "\nAcc. Number : " << _AccountNumber;
-        cout << "\nPassword    : " << _PinCode;
-        cout << "\nBalance     : " << _AccountBalance;
-        cout << "\n___________________\n";
-
-    }
-    
 
     bool Delete()
     {
@@ -373,6 +359,19 @@ public:
         return TotalBalances;
 
     }
+
+    void Deposit(int Amount)
+    {
+        _AccountBalance += Amount;
+        Save();
+    }
+    
+    bool Withdraw(int Amount)
+    {
+        _AccountBalance -= Amount;
+        Save();
+    }
+
 
 
 };
