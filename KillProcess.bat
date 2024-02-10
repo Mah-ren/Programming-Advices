@@ -1,2 +1,2 @@
 @echo off
-taskkill /f /im Course_13.exe
+taskkill /f /im MyDynamicArray.exe
