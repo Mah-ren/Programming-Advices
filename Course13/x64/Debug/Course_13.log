@@ -1,3 +1,2 @@
-﻿  Course13MyQueue.cpp
-Course13MyQueue.obj : error LNK2005: main already defined in Course13DblLinkedList.obj
-C:\Programming_Advices\Programming-Advices\Course13\x64\Debug\Course_13.exe : fatal error LNK1169: one or more multiply defined symbols found
+﻿  Course13DblLinkedList.cpp
+  Course_13.vcxproj -> C:\Programming_Advices\Programming-Advices\Course13\x64\Debug\Course_13.exe

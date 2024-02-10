@@ -13,7 +13,21 @@ int main()
     MyQueue.Push(6);
     MyQueue.Push(8);
 
+    cout << "\nthis is the queue content: ";
+    MyQueue.Print();
 
+
+    MyQueue.Pop();
+    MyQueue.Pop();
+    MyQueue.Pop();
+
+    cout << "\nthe queue content after deleting the first three numbers: ";
+    MyQueue.Print();
+
+    cout << "\nthis is the first digit: " << MyQueue.front();
+    cout << "\nthis is the last digit: " << MyQueue.back();
+
+    cout << "\nthis is the size of the queue: " << MyQueue.Size();
 
     clsDblLinkedList <int> MydblLinkedList;
     

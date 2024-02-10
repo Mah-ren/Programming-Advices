@@ -14,7 +14,7 @@ public:
 	}
 
 	void Pop() {
-		return _MyList.DeleteLastNode();
+		return _MyList.DeleteFirstNode();
 	}
 
 	void Print() {
