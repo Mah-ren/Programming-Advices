@@ -1,0 +1,7 @@
+C:\Programming_Advices\Programming-Advices\Course14\FromSwitchLesson\bin\Debug\FromSwitchLesson.exe.config
+C:\Programming_Advices\Programming-Advices\Course14\FromSwitchLesson\bin\Debug\FromSwitchLesson.exe
+C:\Programming_Advices\Programming-Advices\Course14\FromSwitchLesson\bin\Debug\FromSwitchLesson.pdb
+C:\Programming_Advices\Programming-Advices\Course14\FromSwitchLesson\obj\Debug\FromSwitchLesson.csproj.AssemblyReference.cache
+C:\Programming_Advices\Programming-Advices\Course14\FromSwitchLesson\obj\Debug\FromSwitchLesson.csproj.CoreCompileInputs.cache
+C:\Programming_Advices\Programming-Advices\Course14\FromSwitchLesson\obj\Debug\FromSwitchLesson.exe
+C:\Programming_Advices\Programming-Advices\Course14\FromSwitchLesson\obj\Debug\FromSwitchLesson.pdb

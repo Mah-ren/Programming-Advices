@@ -1,0 +1,7 @@
+C:\Programming_Advices\Programming-Advices\Course14\C#_Syntax\Try And Catch\bin\Debug\Try And Catch.exe.config
+C:\Programming_Advices\Programming-Advices\Course14\C#_Syntax\Try And Catch\bin\Debug\Try And Catch.exe
+C:\Programming_Advices\Programming-Advices\Course14\C#_Syntax\Try And Catch\bin\Debug\Try And Catch.pdb
+C:\Programming_Advices\Programming-Advices\Course14\C#_Syntax\Try And Catch\obj\Debug\Try And Catch.csproj.AssemblyReference.cache
+C:\Programming_Advices\Programming-Advices\Course14\C#_Syntax\Try And Catch\obj\Debug\Try And Catch.csproj.CoreCompileInputs.cache
+C:\Programming_Advices\Programming-Advices\Course14\C#_Syntax\Try And Catch\obj\Debug\Try And Catch.exe
+C:\Programming_Advices\Programming-Advices\Course14\C#_Syntax\Try And Catch\obj\Debug\Try And Catch.pdb

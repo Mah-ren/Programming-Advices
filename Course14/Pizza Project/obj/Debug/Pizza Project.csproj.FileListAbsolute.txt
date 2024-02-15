@@ -1,0 +1,10 @@
+D:\Programming_Advices\Programming-Advices\Course14\Pizza Project\obj\Debug\Pizza Project.csproj.AssemblyReference.cache
+D:\Programming_Advices\Programming-Advices\Course14\Pizza Project\obj\Debug\Pizza_Project.Form1.resources
+D:\Programming_Advices\Programming-Advices\Course14\Pizza Project\obj\Debug\Pizza_Project.Properties.Resources.resources
+D:\Programming_Advices\Programming-Advices\Course14\Pizza Project\obj\Debug\Pizza Project.csproj.GenerateResource.cache
+D:\Programming_Advices\Programming-Advices\Course14\Pizza Project\obj\Debug\Pizza Project.csproj.CoreCompileInputs.cache
+D:\Programming_Advices\Programming-Advices\Course14\Pizza Project\bin\Debug\Pizza Project.exe.config
+D:\Programming_Advices\Programming-Advices\Course14\Pizza Project\bin\Debug\Pizza Project.exe
+D:\Programming_Advices\Programming-Advices\Course14\Pizza Project\bin\Debug\Pizza Project.pdb
+D:\Programming_Advices\Programming-Advices\Course14\Pizza Project\obj\Debug\Pizza Project.exe
+D:\Programming_Advices\Programming-Advices\Course14\Pizza Project\obj\Debug\Pizza Project.pdb

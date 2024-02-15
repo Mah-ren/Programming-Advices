@@ -1,0 +1,7 @@
+C:\Programming_Advices\Programming-Advices\Course14\String Compare\bin\Debug\String Compare.exe.config
+C:\Programming_Advices\Programming-Advices\Course14\String Compare\bin\Debug\String Compare.exe
+C:\Programming_Advices\Programming-Advices\Course14\String Compare\bin\Debug\String Compare.pdb
+C:\Programming_Advices\Programming-Advices\Course14\String Compare\obj\Debug\String Compare.csproj.AssemblyReference.cache
+C:\Programming_Advices\Programming-Advices\Course14\String Compare\obj\Debug\String Compare.csproj.CoreCompileInputs.cache
+C:\Programming_Advices\Programming-Advices\Course14\String Compare\obj\Debug\String Compare.exe
+C:\Programming_Advices\Programming-Advices\Course14\String Compare\obj\Debug\String Compare.pdb
