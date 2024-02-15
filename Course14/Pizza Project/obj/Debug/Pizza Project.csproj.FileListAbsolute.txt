@@ -8,3 +8,4 @@ D:\Programming_Advices\Programming-Advices\Course14\Pizza Project\bin\Debug\Pizz
 D:\Programming_Advices\Programming-Advices\Course14\Pizza Project\bin\Debug\Pizza Project.pdb
 D:\Programming_Advices\Programming-Advices\Course14\Pizza Project\obj\Debug\Pizza Project.exe
 D:\Programming_Advices\Programming-Advices\Course14\Pizza Project\obj\Debug\Pizza Project.pdb
+D:\Programming_Advices\Programming-Advices\Course14\Pizza Project\obj\Debug\Pizza_Project.MainForm.resources
