@@ -1,2 +1,3 @@
 @echo off
-taskkill /f /im MyDynamicArray.exe
+taskkill /f /im Tree View.exe
+ 

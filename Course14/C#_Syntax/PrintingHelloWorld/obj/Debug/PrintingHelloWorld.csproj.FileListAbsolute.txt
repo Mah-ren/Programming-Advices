@@ -1,7 +1,0 @@
-D:\Programming_Advices\Programming-Advices\Course14\PrintingHelloWorld\bin\Debug\PrintingHelloWorld.exe.config
-D:\Programming_Advices\Programming-Advices\Course14\PrintingHelloWorld\bin\Debug\PrintingHelloWorld.exe
-D:\Programming_Advices\Programming-Advices\Course14\PrintingHelloWorld\bin\Debug\PrintingHelloWorld.pdb
-D:\Programming_Advices\Programming-Advices\Course14\PrintingHelloWorld\obj\Debug\PrintingHelloWorld.csproj.AssemblyReference.cache
-D:\Programming_Advices\Programming-Advices\Course14\PrintingHelloWorld\obj\Debug\PrintingHelloWorld.csproj.CoreCompileInputs.cache
-D:\Programming_Advices\Programming-Advices\Course14\PrintingHelloWorld\obj\Debug\PrintingHelloWorld.exe
-D:\Programming_Advices\Programming-Advices\Course14\PrintingHelloWorld\obj\Debug\PrintingHelloWorld.pdb

@@ -1,0 +1,10 @@
+D:\Programming_Advices\Programming-Advices\Course14\Tic Tac Toe\bin\Debug\Tic Tac Toe.exe.config
+D:\Programming_Advices\Programming-Advices\Course14\Tic Tac Toe\bin\Debug\Tic Tac Toe.exe
+D:\Programming_Advices\Programming-Advices\Course14\Tic Tac Toe\bin\Debug\Tic Tac Toe.pdb
+D:\Programming_Advices\Programming-Advices\Course14\Tic Tac Toe\obj\Debug\Tic Tac Toe.csproj.AssemblyReference.cache
+D:\Programming_Advices\Programming-Advices\Course14\Tic Tac Toe\obj\Debug\Tic_Tac_Toe.Form1.resources
+D:\Programming_Advices\Programming-Advices\Course14\Tic Tac Toe\obj\Debug\Tic_Tac_Toe.Properties.Resources.resources
+D:\Programming_Advices\Programming-Advices\Course14\Tic Tac Toe\obj\Debug\Tic Tac Toe.csproj.GenerateResource.cache
+D:\Programming_Advices\Programming-Advices\Course14\Tic Tac Toe\obj\Debug\Tic Tac Toe.csproj.CoreCompileInputs.cache
+D:\Programming_Advices\Programming-Advices\Course14\Tic Tac Toe\obj\Debug\Tic Tac Toe.exe
+D:\Programming_Advices\Programming-Advices\Course14\Tic Tac Toe\obj\Debug\Tic Tac Toe.pdb

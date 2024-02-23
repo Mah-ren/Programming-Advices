@@ -1,7 +1,0 @@
-C:\Programming_Advices\Programming-Advices\Course14\SimpleCalclator\bin\Debug\SimpleCalclator.exe.config
-C:\Programming_Advices\Programming-Advices\Course14\SimpleCalclator\bin\Debug\SimpleCalclator.exe
-C:\Programming_Advices\Programming-Advices\Course14\SimpleCalclator\bin\Debug\SimpleCalclator.pdb
-C:\Programming_Advices\Programming-Advices\Course14\SimpleCalclator\obj\Debug\SimpleCalclator.csproj.AssemblyReference.cache
-C:\Programming_Advices\Programming-Advices\Course14\SimpleCalclator\obj\Debug\SimpleCalclator.csproj.CoreCompileInputs.cache
-C:\Programming_Advices\Programming-Advices\Course14\SimpleCalclator\obj\Debug\SimpleCalclator.exe
-C:\Programming_Advices\Programming-Advices\Course14\SimpleCalclator\obj\Debug\SimpleCalclator.pdb

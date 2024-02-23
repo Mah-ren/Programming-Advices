@@ -1,0 +1,10 @@
+D:\Programming_Advices\Programming-Advices\Course14\CheckListBox\bin\Debug\CheckListBox.exe.config
+D:\Programming_Advices\Programming-Advices\Course14\CheckListBox\bin\Debug\CheckListBox.exe
+D:\Programming_Advices\Programming-Advices\Course14\CheckListBox\bin\Debug\CheckListBox.pdb
+D:\Programming_Advices\Programming-Advices\Course14\CheckListBox\obj\Debug\CheckListBox.csproj.AssemblyReference.cache
+D:\Programming_Advices\Programming-Advices\Course14\CheckListBox\obj\Debug\CheckListBox.Form1.resources
+D:\Programming_Advices\Programming-Advices\Course14\CheckListBox\obj\Debug\CheckListBox.Properties.Resources.resources
+D:\Programming_Advices\Programming-Advices\Course14\CheckListBox\obj\Debug\CheckListBox.csproj.GenerateResource.cache
+D:\Programming_Advices\Programming-Advices\Course14\CheckListBox\obj\Debug\CheckListBox.csproj.CoreCompileInputs.cache
+D:\Programming_Advices\Programming-Advices\Course14\CheckListBox\obj\Debug\CheckListBox.exe
+D:\Programming_Advices\Programming-Advices\Course14\CheckListBox\obj\Debug\CheckListBox.pdb

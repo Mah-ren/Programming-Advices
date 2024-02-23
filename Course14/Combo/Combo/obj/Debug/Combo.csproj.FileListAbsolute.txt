@@ -1,0 +1,21 @@
+C:\Users\Acer\Dropbox\Personal\Advices\2021\14- C# Level1\Projects\Combo\bin\Debug\Memory Game.exe.config
+C:\Users\Acer\Dropbox\Personal\Advices\2021\14- C# Level1\Projects\Combo\bin\Debug\Memory Game.exe
+C:\Users\Acer\Dropbox\Personal\Advices\2021\14- C# Level1\Projects\Combo\bin\Debug\Memory Game.pdb
+C:\Users\Acer\Dropbox\Personal\Advices\2021\14- C# Level1\Projects\Combo\obj\Debug\Combo.csproj.AssemblyReference.cache
+C:\Users\Acer\Dropbox\Personal\Advices\2021\14- C# Level1\Projects\Combo\obj\Debug\Combo.csproj.SuggestedBindingRedirects.cache
+C:\Users\Acer\Dropbox\Personal\Advices\2021\14- C# Level1\Projects\Combo\obj\Debug\Memory_Game.Form1.resources
+C:\Users\Acer\Dropbox\Personal\Advices\2021\14- C# Level1\Projects\Combo\obj\Debug\Memory_Game.Properties.Resources.resources
+C:\Users\Acer\Dropbox\Personal\Advices\2021\14- C# Level1\Projects\Combo\obj\Debug\Combo.csproj.GenerateResource.cache
+C:\Users\Acer\Dropbox\Personal\Advices\2021\14- C# Level1\Projects\Combo\obj\Debug\Combo.csproj.CoreCompileInputs.cache
+C:\Users\Acer\Dropbox\Personal\Advices\2021\14- C# Level1\Projects\Combo\obj\Debug\Memory Game.exe
+C:\Users\Acer\Dropbox\Personal\Advices\2021\14- C# Level1\Projects\Combo\obj\Debug\Memory Game.pdb
+D:\Programming_Advices\Programming-Advices\Course14\Combo\Combo\bin\Debug\Memory Game.exe.config
+D:\Programming_Advices\Programming-Advices\Course14\Combo\Combo\bin\Debug\Memory Game.exe
+D:\Programming_Advices\Programming-Advices\Course14\Combo\Combo\bin\Debug\Memory Game.pdb
+D:\Programming_Advices\Programming-Advices\Course14\Combo\Combo\obj\Debug\Combo.csproj.AssemblyReference.cache
+D:\Programming_Advices\Programming-Advices\Course14\Combo\Combo\obj\Debug\Memory_Game.Form1.resources
+D:\Programming_Advices\Programming-Advices\Course14\Combo\Combo\obj\Debug\Memory_Game.Properties.Resources.resources
+D:\Programming_Advices\Programming-Advices\Course14\Combo\Combo\obj\Debug\Combo.csproj.GenerateResource.cache
+D:\Programming_Advices\Programming-Advices\Course14\Combo\Combo\obj\Debug\Combo.csproj.CoreCompileInputs.cache
+D:\Programming_Advices\Programming-Advices\Course14\Combo\Combo\obj\Debug\Memory Game.exe
+D:\Programming_Advices\Programming-Advices\Course14\Combo\Combo\obj\Debug\Memory Game.pdb

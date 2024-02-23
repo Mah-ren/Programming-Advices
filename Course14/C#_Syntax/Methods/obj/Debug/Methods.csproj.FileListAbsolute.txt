@@ -1,7 +1,0 @@
-C:\Programming_Advices\Programming-Advices\Course14\C#_Syntax\Methods\bin\Debug\Methods.exe.config
-C:\Programming_Advices\Programming-Advices\Course14\C#_Syntax\Methods\bin\Debug\Methods.exe
-C:\Programming_Advices\Programming-Advices\Course14\C#_Syntax\Methods\bin\Debug\Methods.pdb
-C:\Programming_Advices\Programming-Advices\Course14\C#_Syntax\Methods\obj\Debug\Methods.csproj.AssemblyReference.cache
-C:\Programming_Advices\Programming-Advices\Course14\C#_Syntax\Methods\obj\Debug\Methods.csproj.CoreCompileInputs.cache
-C:\Programming_Advices\Programming-Advices\Course14\C#_Syntax\Methods\obj\Debug\Methods.exe
-C:\Programming_Advices\Programming-Advices\Course14\C#_Syntax\Methods\obj\Debug\Methods.pdb

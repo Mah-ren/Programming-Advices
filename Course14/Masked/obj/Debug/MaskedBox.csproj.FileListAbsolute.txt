@@ -1,0 +1,10 @@
+D:\Programming_Advices\Programming-Advices\Course14\Masked\bin\Debug\Masked.exe.config
+D:\Programming_Advices\Programming-Advices\Course14\Masked\bin\Debug\Masked.exe
+D:\Programming_Advices\Programming-Advices\Course14\Masked\bin\Debug\Masked.pdb
+D:\Programming_Advices\Programming-Advices\Course14\Masked\obj\Debug\MaskedBox.csproj.AssemblyReference.cache
+D:\Programming_Advices\Programming-Advices\Course14\Masked\obj\Debug\Masked.Form1.resources
+D:\Programming_Advices\Programming-Advices\Course14\Masked\obj\Debug\Masked.Properties.Resources.resources
+D:\Programming_Advices\Programming-Advices\Course14\Masked\obj\Debug\MaskedBox.csproj.GenerateResource.cache
+D:\Programming_Advices\Programming-Advices\Course14\Masked\obj\Debug\MaskedBox.csproj.CoreCompileInputs.cache
+D:\Programming_Advices\Programming-Advices\Course14\Masked\obj\Debug\Masked.exe
+D:\Programming_Advices\Programming-Advices\Course14\Masked\obj\Debug\Masked.pdb

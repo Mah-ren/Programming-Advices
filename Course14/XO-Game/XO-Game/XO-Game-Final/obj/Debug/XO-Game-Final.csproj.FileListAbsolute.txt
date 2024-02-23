@@ -1,0 +1,21 @@
+C:\Users\Acer\Dropbox\Personal\Advices\2021\14- C# Level1\Projects\XO-Game\XO-Game-Final\bin\Debug\XO-Game-Final.exe.config
+C:\Users\Acer\Dropbox\Personal\Advices\2021\14- C# Level1\Projects\XO-Game\XO-Game-Final\bin\Debug\XO-Game-Final.exe
+C:\Users\Acer\Dropbox\Personal\Advices\2021\14- C# Level1\Projects\XO-Game\XO-Game-Final\bin\Debug\XO-Game-Final.pdb
+C:\Users\Acer\Dropbox\Personal\Advices\2021\14- C# Level1\Projects\XO-Game\XO-Game-Final\obj\Debug\XO-Game-Final.csproj.AssemblyReference.cache
+C:\Users\Acer\Dropbox\Personal\Advices\2021\14- C# Level1\Projects\XO-Game\XO-Game-Final\obj\Debug\XO-Game-Final.csproj.SuggestedBindingRedirects.cache
+C:\Users\Acer\Dropbox\Personal\Advices\2021\14- C# Level1\Projects\XO-Game\XO-Game-Final\obj\Debug\XO_Game_Final.Form1.resources
+C:\Users\Acer\Dropbox\Personal\Advices\2021\14- C# Level1\Projects\XO-Game\XO-Game-Final\obj\Debug\XO_Game_Final.Properties.Resources.resources
+C:\Users\Acer\Dropbox\Personal\Advices\2021\14- C# Level1\Projects\XO-Game\XO-Game-Final\obj\Debug\XO-Game-Final.csproj.GenerateResource.cache
+C:\Users\Acer\Dropbox\Personal\Advices\2021\14- C# Level1\Projects\XO-Game\XO-Game-Final\obj\Debug\XO-Game-Final.csproj.CoreCompileInputs.cache
+C:\Users\Acer\Dropbox\Personal\Advices\2021\14- C# Level1\Projects\XO-Game\XO-Game-Final\obj\Debug\XO-Game-Final.exe
+C:\Users\Acer\Dropbox\Personal\Advices\2021\14- C# Level1\Projects\XO-Game\XO-Game-Final\obj\Debug\XO-Game-Final.pdb
+D:\Programming_Advices\Programming-Advices\Course14\XO-Game\XO-Game\XO-Game-Final\bin\Debug\XO-Game-Final.exe.config
+D:\Programming_Advices\Programming-Advices\Course14\XO-Game\XO-Game\XO-Game-Final\bin\Debug\XO-Game-Final.exe
+D:\Programming_Advices\Programming-Advices\Course14\XO-Game\XO-Game\XO-Game-Final\bin\Debug\XO-Game-Final.pdb
+D:\Programming_Advices\Programming-Advices\Course14\XO-Game\XO-Game\XO-Game-Final\obj\Debug\XO-Game-Final.csproj.AssemblyReference.cache
+D:\Programming_Advices\Programming-Advices\Course14\XO-Game\XO-Game\XO-Game-Final\obj\Debug\XO_Game_Final.Form1.resources
+D:\Programming_Advices\Programming-Advices\Course14\XO-Game\XO-Game\XO-Game-Final\obj\Debug\XO_Game_Final.Properties.Resources.resources
+D:\Programming_Advices\Programming-Advices\Course14\XO-Game\XO-Game\XO-Game-Final\obj\Debug\XO-Game-Final.csproj.GenerateResource.cache
+D:\Programming_Advices\Programming-Advices\Course14\XO-Game\XO-Game\XO-Game-Final\obj\Debug\XO-Game-Final.csproj.CoreCompileInputs.cache
+D:\Programming_Advices\Programming-Advices\Course14\XO-Game\XO-Game\XO-Game-Final\obj\Debug\XO-Game-Final.exe
+D:\Programming_Advices\Programming-Advices\Course14\XO-Game\XO-Game\XO-Game-Final\obj\Debug\XO-Game-Final.pdb

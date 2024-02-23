@@ -1,0 +1,10 @@
+D:\Programming_Advices\Programming-Advices\Course14\Linklabel\bin\Debug\Linklabel.exe.config
+D:\Programming_Advices\Programming-Advices\Course14\Linklabel\bin\Debug\Linklabel.exe
+D:\Programming_Advices\Programming-Advices\Course14\Linklabel\bin\Debug\Linklabel.pdb
+D:\Programming_Advices\Programming-Advices\Course14\Linklabel\obj\Debug\Linklabel.csproj.AssemblyReference.cache
+D:\Programming_Advices\Programming-Advices\Course14\Linklabel\obj\Debug\Linklabel.Form1.resources
+D:\Programming_Advices\Programming-Advices\Course14\Linklabel\obj\Debug\Linklabel.Properties.Resources.resources
+D:\Programming_Advices\Programming-Advices\Course14\Linklabel\obj\Debug\Linklabel.csproj.GenerateResource.cache
+D:\Programming_Advices\Programming-Advices\Course14\Linklabel\obj\Debug\Linklabel.csproj.CoreCompileInputs.cache
+D:\Programming_Advices\Programming-Advices\Course14\Linklabel\obj\Debug\Linklabel.exe
+D:\Programming_Advices\Programming-Advices\Course14\Linklabel\obj\Debug\Linklabel.pdb

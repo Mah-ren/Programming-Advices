@@ -1,0 +1,10 @@
+D:\Programming_Advices\Programming-Advices\Course14\Notify Icon\bin\Debug\Notify Icon.exe.config
+D:\Programming_Advices\Programming-Advices\Course14\Notify Icon\bin\Debug\Notify Icon.exe
+D:\Programming_Advices\Programming-Advices\Course14\Notify Icon\bin\Debug\Notify Icon.pdb
+D:\Programming_Advices\Programming-Advices\Course14\Notify Icon\obj\Debug\Notify Icon.csproj.AssemblyReference.cache
+D:\Programming_Advices\Programming-Advices\Course14\Notify Icon\obj\Debug\Notify_Icon.Form1.resources
+D:\Programming_Advices\Programming-Advices\Course14\Notify Icon\obj\Debug\Notify_Icon.Properties.Resources.resources
+D:\Programming_Advices\Programming-Advices\Course14\Notify Icon\obj\Debug\Notify Icon.csproj.GenerateResource.cache
+D:\Programming_Advices\Programming-Advices\Course14\Notify Icon\obj\Debug\Notify Icon.csproj.CoreCompileInputs.cache
+D:\Programming_Advices\Programming-Advices\Course14\Notify Icon\obj\Debug\Notify Icon.exe
+D:\Programming_Advices\Programming-Advices\Course14\Notify Icon\obj\Debug\Notify Icon.pdb

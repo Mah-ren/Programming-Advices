@@ -1,7 +1,0 @@
-C:\Programming_Advices\Programming-Advices\Course14\C#_Syntax\While Loop\bin\Debug\While Loop.exe.config
-C:\Programming_Advices\Programming-Advices\Course14\C#_Syntax\While Loop\bin\Debug\While Loop.exe
-C:\Programming_Advices\Programming-Advices\Course14\C#_Syntax\While Loop\bin\Debug\While Loop.pdb
-C:\Programming_Advices\Programming-Advices\Course14\C#_Syntax\While Loop\obj\Debug\While Loop.csproj.AssemblyReference.cache
-C:\Programming_Advices\Programming-Advices\Course14\C#_Syntax\While Loop\obj\Debug\While Loop.csproj.CoreCompileInputs.cache
-C:\Programming_Advices\Programming-Advices\Course14\C#_Syntax\While Loop\obj\Debug\While Loop.exe
-C:\Programming_Advices\Programming-Advices\Course14\C#_Syntax\While Loop\obj\Debug\While Loop.pdb
