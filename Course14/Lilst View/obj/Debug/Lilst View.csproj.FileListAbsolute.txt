@@ -1,0 +1,15 @@
+C:\Users\AGHA SMART STORE\source\repos\Lilst View\bin\Debug\Lilst View.exe.config
+C:\Users\AGHA SMART STORE\source\repos\Lilst View\bin\Debug\Lilst View.exe
+C:\Users\AGHA SMART STORE\source\repos\Lilst View\bin\Debug\Lilst View.pdb
+C:\Users\AGHA SMART STORE\source\repos\Lilst View\obj\Debug\Lilst View.csproj.AssemblyReference.cache
+C:\Users\AGHA SMART STORE\source\repos\Lilst View\obj\Debug\Lilst_View.Properties.Resources.resources
+C:\Users\AGHA SMART STORE\source\repos\Lilst View\obj\Debug\Lilst View.csproj.GenerateResource.cache
+C:\Users\AGHA SMART STORE\source\repos\Lilst View\obj\Debug\Lilst View.csproj.CoreCompileInputs.cache
+C:\Users\AGHA SMART STORE\source\repos\Lilst View\obj\Debug\Lilst View.exe
+C:\Users\AGHA SMART STORE\source\repos\Lilst View\obj\Debug\Lilst View.pdb
+C:\Users\AGHA SMART STORE\source\repos\Lilst View\obj\Debug\Lilst_View.MainForm.resources
+C:\Users\AGHA SMART STORE\source\repos\Lilst View\obj\Debug\Lilst_View.ListView.resources
+C:\Users\AGHA SMART STORE\source\repos\Lilst View\obj\Debug\Lilst_View.TrackBar_Zoom.resources
+C:\Users\AGHA SMART STORE\source\repos\Lilst View\obj\Debug\Lilst_View.NumericUpDown.resources
+C:\Users\AGHA SMART STORE\source\repos\Lilst View\obj\Debug\Lilst_View.TabControl.resources
+C:\Users\AGHA SMART STORE\source\repos\Lilst View\obj\Debug\Lilst_View.ColorDialog.resources

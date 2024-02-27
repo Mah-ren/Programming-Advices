@@ -1,0 +1,3 @@
+﻿  myFirstProject.cpp
+C:\Users\AGHA SMART STORE\source\repos\myFirstProject\myFirstProject\myFirstProject.cpp(77,16): warning C4244: 'return': conversion from 'double' to 'int', possible loss of data
+  myFirstProject.vcxproj -> C:\Users\AGHA SMART STORE\source\repos\myFirstProject\x64\Debug\myFirstProject.exe

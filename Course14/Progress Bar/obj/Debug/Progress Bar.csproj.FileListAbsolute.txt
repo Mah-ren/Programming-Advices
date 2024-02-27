@@ -1,0 +1,10 @@
+C:\Users\AGHA SMART STORE\source\repos\Progress Bar\bin\Debug\Progress Bar.exe.config
+C:\Users\AGHA SMART STORE\source\repos\Progress Bar\bin\Debug\Progress Bar.exe
+C:\Users\AGHA SMART STORE\source\repos\Progress Bar\bin\Debug\Progress Bar.pdb
+C:\Users\AGHA SMART STORE\source\repos\Progress Bar\obj\Debug\Progress Bar.csproj.AssemblyReference.cache
+C:\Users\AGHA SMART STORE\source\repos\Progress Bar\obj\Debug\Progress_Bar.Form1.resources
+C:\Users\AGHA SMART STORE\source\repos\Progress Bar\obj\Debug\Progress_Bar.Properties.Resources.resources
+C:\Users\AGHA SMART STORE\source\repos\Progress Bar\obj\Debug\Progress Bar.csproj.GenerateResource.cache
+C:\Users\AGHA SMART STORE\source\repos\Progress Bar\obj\Debug\Progress Bar.csproj.CoreCompileInputs.cache
+C:\Users\AGHA SMART STORE\source\repos\Progress Bar\obj\Debug\Progress Bar.exe
+C:\Users\AGHA SMART STORE\source\repos\Progress Bar\obj\Debug\Progress Bar.pdb

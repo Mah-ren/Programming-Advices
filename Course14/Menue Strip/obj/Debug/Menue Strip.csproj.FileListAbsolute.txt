@@ -1,0 +1,10 @@
+C:\Users\AGHA SMART STORE\source\repos\Menue Strip\bin\Debug\Menue Strip.exe.config
+C:\Users\AGHA SMART STORE\source\repos\Menue Strip\bin\Debug\Menue Strip.exe
+C:\Users\AGHA SMART STORE\source\repos\Menue Strip\bin\Debug\Menue Strip.pdb
+C:\Users\AGHA SMART STORE\source\repos\Menue Strip\obj\Debug\Menue Strip.csproj.AssemblyReference.cache
+C:\Users\AGHA SMART STORE\source\repos\Menue Strip\obj\Debug\Menue_Strip.Form1.resources
+C:\Users\AGHA SMART STORE\source\repos\Menue Strip\obj\Debug\Menue_Strip.Properties.Resources.resources
+C:\Users\AGHA SMART STORE\source\repos\Menue Strip\obj\Debug\Menue Strip.csproj.GenerateResource.cache
+C:\Users\AGHA SMART STORE\source\repos\Menue Strip\obj\Debug\Menue Strip.csproj.CoreCompileInputs.cache
+C:\Users\AGHA SMART STORE\source\repos\Menue Strip\obj\Debug\Menue Strip.exe
+C:\Users\AGHA SMART STORE\source\repos\Menue Strip\obj\Debug\Menue Strip.pdb

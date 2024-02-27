@@ -3,12 +3,12 @@
   "WorkspaceRootPath": "D:\\Programming_Advices\\Programming-Advices\\Course14\\Timer\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{072FFE7E-C4DF-4146-93AE-B4A22A956789}|Timer.csproj|d:\\programming_advices\\programming-advices\\course14\\timer\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{072FFE7E-C4DF-4146-93AE-B4A22A956789}|Timer.csproj|solutionrelative:form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{072FFE7E-C4DF-4146-93AE-B4A22A956789}|Timer.csproj|D:\\Programming_Advices\\Programming-Advices\\Course14\\Timer\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{072FFE7E-C4DF-4146-93AE-B4A22A956789}|Timer.csproj|solutionrelative:form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{072FFE7E-C4DF-4146-93AE-B4A22A956789}|Timer.csproj|d:\\programming_advices\\programming-advices\\course14\\timer\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{072FFE7E-C4DF-4146-93AE-B4A22A956789}|Timer.csproj|solutionrelative:form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{072FFE7E-C4DF-4146-93AE-B4A22A956789}|Timer.csproj|D:\\Programming_Advices\\Programming-Advices\\Course14\\Timer\\form1.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -22,7 +22,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 5,
+          "SelectedChildIndex": 6,
           "Children": [
             {
               "$type": "Bookmark",
@@ -49,32 +49,34 @@
               "ToolTip": "D:\\Programming_Advices\\Programming-Advices\\Course14\\Timer\\Form1.Designer.cs",
               "RelativeToolTip": "Form1.Designer.cs",
               "ViewState": "AQIAAC0AAAAAAAAAAAAEwDQAAAAoAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001384|",
-              "WhenOpened": "2024-02-21T12:06:49.744Z"
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-02-21T12:06:49.744Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "Form1.cs",
               "DocumentMoniker": "D:\\Programming_Advices\\Programming-Advices\\Course14\\Timer\\Form1.cs",
               "RelativeDocumentMoniker": "Form1.cs",
               "ToolTip": "D:\\Programming_Advices\\Programming-Advices\\Course14\\Timer\\Form1.cs",
               "RelativeToolTip": "Form1.cs",
-              "ViewState": "AQIAABQAAAAAAAAAAAAUwB0AAAANAAAA",
+              "ViewState": "AQIAAAYAAAAAAAAAAAAswB0AAAANAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-02-21T12:01:52.436Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
               "Title": "Form1.cs [Design]",
               "DocumentMoniker": "D:\\Programming_Advices\\Programming-Advices\\Course14\\Timer\\Form1.cs",
               "RelativeDocumentMoniker": "Form1.cs",
               "ToolTip": "D:\\Programming_Advices\\Programming-Advices\\Course14\\Timer\\Form1.cs [Design]",
               "RelativeToolTip": "Form1.cs [Design]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003525|",
-              "WhenOpened": "2024-02-21T11:44:31.565Z"
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-02-21T11:44:31.565Z",
+              "EditorCaption": " [Design]"
             }
           ]
         }

@@ -1,0 +1,4 @@
+﻿  BankWithExtension27november.c++.cpp
+C:\Users\AGHA SMART STORE\source\repos\BankWithExtension27november.c++\BankWithExtension27november.c++\BankWithExtension27november.c++.cpp(562,100): warning C4309: 'argument': truncation of constant value
+C:\Users\AGHA SMART STORE\source\repos\BankWithExtension27november.c++\BankWithExtension27november.c++\BankWithExtension27november.c++.cpp(901,32): warning C4267: '=': conversion from 'size_t' to 'short', possible loss of data
+  BankWithExtension27november.c++.vcxproj -> C:\Users\AGHA SMART STORE\source\repos\BankWithExtension27november.c++\x64\Debug\BankWithExtension27november.c++.exe

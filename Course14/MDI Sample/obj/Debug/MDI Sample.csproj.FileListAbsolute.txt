@@ -1,0 +1,10 @@
+C:\Users\AGHA SMART STORE\source\repos\MDI Sample\bin\Debug\MDI Sample.exe.config
+C:\Users\AGHA SMART STORE\source\repos\MDI Sample\bin\Debug\MDI Sample.exe
+C:\Users\AGHA SMART STORE\source\repos\MDI Sample\bin\Debug\MDI Sample.pdb
+C:\Users\AGHA SMART STORE\source\repos\MDI Sample\obj\Debug\MDI Sample.csproj.AssemblyReference.cache
+C:\Users\AGHA SMART STORE\source\repos\MDI Sample\obj\Debug\MDI_Sample.Form1.resources
+C:\Users\AGHA SMART STORE\source\repos\MDI Sample\obj\Debug\MDI_Sample.Properties.Resources.resources
+C:\Users\AGHA SMART STORE\source\repos\MDI Sample\obj\Debug\MDI Sample.csproj.GenerateResource.cache
+C:\Users\AGHA SMART STORE\source\repos\MDI Sample\obj\Debug\MDI Sample.csproj.CoreCompileInputs.cache
+C:\Users\AGHA SMART STORE\source\repos\MDI Sample\obj\Debug\MDI Sample.exe
+C:\Users\AGHA SMART STORE\source\repos\MDI Sample\obj\Debug\MDI Sample.pdb

@@ -1,0 +1,10 @@
+C:\Users\AGHA SMART STORE\source\repos\color dialog\bin\Debug\color dialog.exe.config
+C:\Users\AGHA SMART STORE\source\repos\color dialog\bin\Debug\color dialog.exe
+C:\Users\AGHA SMART STORE\source\repos\color dialog\bin\Debug\color dialog.pdb
+C:\Users\AGHA SMART STORE\source\repos\color dialog\obj\Debug\color dialog.csproj.AssemblyReference.cache
+C:\Users\AGHA SMART STORE\source\repos\color dialog\obj\Debug\color_dialog.Form1.resources
+C:\Users\AGHA SMART STORE\source\repos\color dialog\obj\Debug\color_dialog.Properties.Resources.resources
+C:\Users\AGHA SMART STORE\source\repos\color dialog\obj\Debug\color dialog.csproj.GenerateResource.cache
+C:\Users\AGHA SMART STORE\source\repos\color dialog\obj\Debug\color dialog.csproj.CoreCompileInputs.cache
+C:\Users\AGHA SMART STORE\source\repos\color dialog\obj\Debug\color dialog.exe
+C:\Users\AGHA SMART STORE\source\repos\color dialog\obj\Debug\color dialog.pdb
